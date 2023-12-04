@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { arrayMethods } from '../lib/arrayMethods'; // Adjust path as needed
+import { arrayMethods } from '../lib/arrayMethods';
+import './HomePage.css';
 
 function HomePage() {
     let navigate = useNavigate();
@@ -8,7 +9,13 @@ function HomePage() {
     return (
         <>
             <section className="header">
-                {/* ... header content ... */}
+                <div className="header__content">
+                    <div className="header__text">
+                        <h1>Array methods</h1>
+                        <p>Summaries, syntax and example</p>
+                    </div>
+                    <img src='/diagram_array.png' alt='diagram of an array'/>
+                </div>
             </section>
 
             <section className="cards">

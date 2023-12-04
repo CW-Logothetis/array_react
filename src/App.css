@@ -5,6 +5,39 @@
   text-align: center;
 }
 
+:root {
+  --js-yellow: #e8d44d;
+  --js-grey: #323330;
+  --off-white: aliceblue;
+  font-family: BlinkMacSystemFont,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue",sans-serif;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  background: rgb(20, 20, 40);
+  /* scrollbar-gutter: stable; */
+  overflow-y: scroll;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+main {
+  margin-bottom: 5rem;
+}
+
+.layout {
+  --width: 700px;
+  padding-left: max(1rem, calc(calc(100vw - var(--width)) / 2));
+  padding-right: max(1rem, calc(calc(100vw - var(--width)) / 2));
+}
+
 .logo {
   height: 6em;
   padding: 1.5em;
