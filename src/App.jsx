@@ -3,8 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout.jsx';
 import HomePage from './components/HomePage';
 import ArrayMethodPage from './components/ArrayMethodPage';
-import './App.css'; // Assumed the CSS file is at src/app.css
-// Import other pages/components as needed
+import './App.css';
 
 function App() {
     return (
@@ -12,7 +11,6 @@ function App() {
             <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/arrays/:array_method" element={<ArrayMethodPage />} />
-                {/* Define other routes here */}
             </Routes>
         </Layout>
     );

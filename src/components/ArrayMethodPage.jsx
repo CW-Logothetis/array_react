@@ -3,10 +3,12 @@ import {useParams} from 'react-router-dom';
 import OpenAI from 'openai';
 
 function ArrayMethodPage() {
+    // TODO: temp allow browser whilst testing locally. Remove when deploy to Vercel.
     const openai = new OpenAI({
-        apiKey: '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',
+        apiKey: import.meta.env.VITE_OPENAI_API_KEY,
         dangerouslyAllowBrowser: true
     })
+
     const params = useParams();
     const arrayMethodID = Object.values(params)
     console.log(arrayMethodID)
@@ -42,19 +44,9 @@ function ArrayMethodPage() {
             }
             setLoading(false);  // Set loading to false regardless of success or error
         }
+    }, [arrayMethodID]);
 
-        // Make sure that your OpenAI calls are made only once per change of the array method
-        if (output === null) {
-            fetchCompletion()
-                .catch(error => {
-                    console.error('Error fetching promise:', error);
-                });
-        }
-    }, [arrayMethodID]); // Depend on array_method instead
-
-
-    // Utility function
-    function styleHeadings(rawContent) {
+    function styleHeadings() {
         let newOutput
         const explanationOutput = output.replace("EXPLANATION", "<div style='margin-bottom: 0.5rem; font-weight: 600'>EXPLANATION</div>");
         const syntaxOutput = explanationOutput.replace("SYNTAX", "<div style='margin: 20px 0 0.5rem; font-weight: 600'>SYNTAX</div>")
@@ -67,7 +59,7 @@ function ArrayMethodPage() {
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                <div dangerouslySetInnerHTML={{__html: styleHeadings(output)}}/>
+                <div dangerouslySetInnerHTML={{__html: styleHeadings(output)}} />
             )}
         </section>
     );
