@@ -7,10 +7,9 @@ function ArrayMethodPage() {
 
     // TODO: temp allow browser whilst testing locally. Remove when deploy to Vercel.
     const openai = new OpenAI({
-        apiKey: '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',
+        apiKey: import.meta.env.VITE_OPENAI_API_KEY,
         dangerouslyAllowBrowser: true
     })
-
     const {array_method} = useParams();
     console.log(array_method)
 
