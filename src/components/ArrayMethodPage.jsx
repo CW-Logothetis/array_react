@@ -1,14 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, {useState, useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 import OpenAI from 'openai';
-import { arrayMethods } from '../lib/arrayMethods'; // Adjust path as needed
 
 function ArrayMethodPage() {
     const openai = new OpenAI({
         apiKey: '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',
         dangerouslyAllowBrowser: true
     })
-    const params  = useParams();
+    const params = useParams();
     const arrayMethodID = Object.values(params)
     console.log(arrayMethodID)
     const [output, setOutput] = useState(null);
@@ -18,7 +17,7 @@ function ArrayMethodPage() {
 
         const prompt = `
             Create three paragraph sections, with the headings for each section in uppercase. 
-            First, under the EXPLANATION heading, explain "array.Prototype.${ arrayMethodID }()". 
+            First, under the EXPLANATION heading, explain "array.Prototype.${arrayMethodID}()". 
             Then, under the SYNTAX heading, provide the syntax. Finally, under the EXAMPLES heading, give two examples.`;
 
         async function fetchCompletion() {
@@ -43,15 +42,15 @@ function ArrayMethodPage() {
             }
             setLoading(false);  // Set loading to false regardless of success or error
         }
+
         // Make sure that your OpenAI calls are made only once per change of the array method
         if (output === null) {
-            fetchCompletion().catch(error => {
-                console.error('Error fetching promise:', error);
-            });
+            fetchCompletion()
+                .catch(error => {
+                    console.error('Error fetching promise:', error);
+                });
         }
     }, [arrayMethodID]); // Depend on array_method instead
-
-
 
 
     // Utility function
@@ -68,7 +67,7 @@ function ArrayMethodPage() {
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                <div dangerouslySetInnerHTML={{ __html: styleHeadings(output) }} />
+                <div dangerouslySetInnerHTML={{__html: styleHeadings(output)}}/>
             )}
         </section>
     );
