@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { arrayMethods } from '../lib/arrayMethods';
 import './HomePage.css';
+import diagramArray from '../assets/diagram_array.png';
 
 function HomePage() {
     let navigate = useNavigate();
@@ -14,7 +15,7 @@ function HomePage() {
                         <h1>Array methods</h1>
                         <p>Summaries, syntax and example</p>
                     </div>
-                    <img src='/diagram_array.png' alt='diagram of an array'/>
+                    <img src={diagramArray} alt='diagram of an array'/>
                 </div>
             </section>
 
