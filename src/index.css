@@ -3,6 +3,7 @@
 
 :root {
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+    color: var(--off-white);
     line-height: 1.5;
     font-weight: 400;
     font-synthesis: none;
@@ -26,7 +27,7 @@ html {
     -webkit-text-size-adjust: none;
     text-size-adjust: none;
 
-    background: rgb(20, 20, 40);
+    background: var(--background);
     /* scrollbar-gutter: stable; */
     overflow-y: scroll;
 }
@@ -71,19 +72,15 @@ a {
     transition: color 0.3s ease-in-out;
 }
 
-a:hover,
 a:focus {
-    color: var(--purple);
+    outline: var(--purple) dashed 2px;
+    outline-offset: 2px;
+    color: var(--off-white);
 }
 
 a:hover {
-  border-bottom: var(--purple) solid 2px;
-}
-
-a:focus {
-  outline: var(--purple) dashed 2px;
-  outline-offset: 2px;
-
+    color: var(--purple);
+    border-bottom: var(--purple) solid 2px;
 }
 
 /* A elements that don't have a class get default styles */
@@ -128,23 +125,4 @@ nav > a {
     text-decoration: none;
 }
 
-button {
-    border-radius: 8px;
-    border: 1px solid transparent;
-    padding: 0.6em 1.2em;
-    font-size: var(--step-0);
-    font-weight: 500;
-    font-family: inherit;
-    background-color: #1a1a1a;
-    cursor: pointer;
-    transition: border-color 0.25s;
-}
 
-button:hover {
-    border-color: var(--light-purple);
-}
-
-button:focus,
-button:focus-visible {
-    outline: 4px auto -webkit-focus-ring-color;
-}

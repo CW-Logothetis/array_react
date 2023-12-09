@@ -50,8 +50,8 @@ pre, code {
     font-family: 'Courier New', monospace;
     font-size: var(--step--1);
     margin-inline: 5px;
-    padding: 2px 5px;
-    background: var(--purple)25;
+    padding: 1rem;
+    background: var(--header);
     border-radius: 5px;
 }
 

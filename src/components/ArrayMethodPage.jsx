@@ -110,7 +110,7 @@ function ArrayMethodPage() {
                     {loading && <p>Loading...</p>}
                     {!loading && error && <p>Error: {error}</p>}
                     {!loading && !error && output && (
-                        <div style={{textAlign: "left", fontSize: "var(--step-0)"}}
+                        <div style={{textAlign: "left", fontSize: "var(--step-0)", maxWidth: "80ch", margin: "0 auto"}}
                              dangerouslySetInnerHTML={{__html: styleHeadings(output)}}/>
                     )}
                 </section>
