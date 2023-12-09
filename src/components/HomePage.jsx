@@ -9,7 +9,7 @@ function HomePage() {
 
     return (
         <>
-            <section className="header">
+            <header>
                 <div className="header__content">
                     <div className="header__text">
                         <h1>Array methods</h1>
@@ -17,7 +17,7 @@ function HomePage() {
                     </div>
                     <img src={diagramArray} alt='diagram of an array'/>
                 </div>
-            </section>
+            </header>
 
             <section className="cards">
                 {arrayMethods.map((arrayMethod) => (

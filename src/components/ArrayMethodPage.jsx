@@ -3,7 +3,7 @@ import {useParams} from 'react-router-dom';
 import OpenAI from 'openai';
 import {styleHeadings} from '../utils/styleHeadings';
 import {arrayMethods} from "../lib/arrayMethods.js";
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 import './ArrayMethodPage.css';
 
 function ArrayMethodPage() {
@@ -46,9 +46,9 @@ function ArrayMethodPage() {
         <ul>
             {array.map(method => (
                 <li key={method.id}>
-                    <Link to={`/arrays/${method.id}`} className="">
+                    <NavLink to={`/arrays/${method.id}`} className="">
                         {method.method}
-                    </Link>
+                    </NavLink>
                 </li>
             ))}
         </ul>
@@ -96,12 +96,11 @@ function ArrayMethodPage() {
     // TODO: going to trust OpenAI to be serving safe HTML, but could add DOMPurify
     return (
         <>
-            <section className="header">
-                <div className="header__content">
-                    <h1>array.prototype.<span style={{fontWeight: 600}}>{array_method}()</span></h1>
-                </div>
-            </section>
-
+            <header>
+                <nav>
+                    <NavLink to="/">Home</NavLink>
+                </nav>
+            </header>
             <div className="cont">
                 <section className="method-menu">
                     {renderList(arrayAtoM)}
@@ -111,7 +110,7 @@ function ArrayMethodPage() {
                     {loading && <p>Loading...</p>}
                     {!loading && error && <p>Error: {error}</p>}
                     {!loading && !error && output && (
-                        <div style={{textAlign: "left"}}
+                        <div style={{textAlign: "left", fontSize: "var(--step-0)"}}
                              dangerouslySetInnerHTML={{__html: styleHeadings(output)}}/>
                     )}
                 </section>
