@@ -7,15 +7,19 @@ import diagramArray from '../assets/diagram_array.png';
 function HomePage() {
     let navigate = useNavigate();
 
+    const handleCardClick = (arrayMethod) => {
+        navigate(`/arrays/${arrayMethod.id}`);
+    };
+
     return (
-        <>
+        <div>
             <header>
                 <div className="header__content">
                     <div className="header__text">
                         <h1>Array methods</h1>
                         <p>Summaries, syntax and example</p>
                     </div>
-                    <img src={diagramArray} alt='diagram of an array'/>
+                    <img src={diagramArray} alt='diagram of an array' width="450" height="80" />
                 </div>
             </header>
 
@@ -23,7 +27,14 @@ function HomePage() {
                 {arrayMethods.map((arrayMethod) => (
                     <div
                         key={arrayMethod.id}
-                        onClick={() => navigate('/arrays/' + arrayMethod.id)}
+                        role="button"
+                        tabIndex={0}
+                        onClick={() => handleCardClick(arrayMethod)}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                                handleCardClick(arrayMethod);
+                            }
+                        }}
                         className="card flex-col"
                     >
                         <h2>{arrayMethod.method}</h2>
@@ -31,7 +42,7 @@ function HomePage() {
                     </div>
                 ))}
             </section>
-        </>
+        </div>
     );
 }
 

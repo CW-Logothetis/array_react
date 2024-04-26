@@ -89,3 +89,8 @@ a {
 .card:hover > p {
     color: rgb(16, 16, 16);
 }
+
+img {
+    max-width: 100%;
+    height: auto;
+}
