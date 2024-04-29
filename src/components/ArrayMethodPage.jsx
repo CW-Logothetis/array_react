@@ -45,7 +45,7 @@ const renderList = (array) => (
     <ul>
         {array.map(method => (
             <li key={method.id}>
-                <NavLink to={`/arrays/${method.id}`} className="">
+                <NavLink to={`/arrays/${method.id}`} className="button text-only">
                     {method.method}
                 </NavLink>
             </li>
@@ -123,7 +123,7 @@ function ArrayMethodPage() {
         <div>
             <header>
                 <nav>
-                    <NavLink to="/">Home</NavLink>
+                    <NavLink to="/" className="button text-only">Home</NavLink>
                 </nav>
             </header>
             <div className="cont">

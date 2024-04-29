@@ -1,0 +1,136 @@
+a {
+  color: var(--light-purple);
+  background: transparent;
+  border-radius: 2px;
+  opacity: 0.8;
+  transition: opacity 0.3s ease-in-out;
+
+  // `outline` better than `border` here
+  // border would require a little padding to look decent, but padding then pushes hyperlink text away from surrounding text
+  // outline doesn't affect layout.
+  &:hover {
+    opacity: 1;
+    outline: solid 2  px var(--light-purple);
+    outline-offset: 2px;
+  }
+
+  // All <a> and '<a> buttons' are given focus-visible
+  // :focus-visible for keyboard or other non-mouse means, which is good for <a>
+  // :focus would apply regardless of method (keyboard or mouse). Don't want this for <a> and 'buttons'
+  // note: focus is good for inputs, to show a current focus state for cursor after transient state of 'active'
+  &:focus-visible {
+    outline: dashed 2px var(--js-yellow);
+    outline-offset: 2px;
+  }
+
+  // this solves something (which is admittedly a very small blip) that I don't like on 99% of sites:
+  // if a user focuses with keyboard, goes elsewhere, then hovers over with mouse, there will be no noticeable change
+  // (it'll just stay as keyboard focussed and the mouse hover will do nothing)
+  // I prefer a change, so <a> and buttons on this site will change to yellow text color on focus-visible:hover
+  &:focus-visible:hover {
+    background: transparent;
+    color: var(--js-yellow);
+  }
+
+  // Opacity effect will appear for a split-second, just to give user feedback that they did click/select
+  // Don't want to transform traditional hyperlinks in text in any way as will likely shift layout of text around it
+  &:active {
+    opacity: 0.5;
+  }
+}
+
+.button {
+  // unlike <a>, all buttons get a border and no underline
+  border: solid 1px transparent;
+  border-radius: 2px;
+  text-decoration: none;
+
+  // remove the outline set on a:hover. Buttons have padding, so using a border instead of outline is fine.
+  // and outline just used for focus-visible
+  &:hover {
+    outline: none;
+  }
+
+  &:focus-visible {
+    background: var(--js-yellow);
+    color: var(--js-grey);
+    outline: dashed 2px var(--js-yellow);
+    outline-offset: 4px;
+  }
+}
+
+/// common styles for solid and outline only
+%button-variant {
+  padding: 1% 4%;
+
+  &:hover {
+    background: var(--background);
+    color: var(--off-white);
+  }
+
+  &:focus-visible {
+    border-color: transparent;
+  }
+}
+
+.solid,
+.outline {
+  @extend %button-variant;
+  border-color: var(--light);
+}
+
+.solid {
+  background: var(--light);
+  color: var(--js-grey);
+}
+
+.outline {
+  @extend %button-variant;
+  color: var(--light);
+
+  &:hover {
+    background: var(--light);
+    color: var(--js-grey);
+  }
+}
+
+/// common styles for text-only and link
+%link-variant {
+  &:hover {
+    outline-offset: 4px;
+  }
+  &:focus-visible {
+    color: var(--js-grey)
+  }
+  &:focus-visible:hover {
+    outline: var(--js-yellow) dashed 2px;
+  }
+}
+
+.text-only,
+.link {
+  @extend %link-variant;
+}
+
+.text-only {
+  color: var(--off-white);
+
+  &:hover {
+    // don't want to add padding to text-only and link 'buttons',
+    // so use outline again, rather than border
+    outline: solid 2px var(--off-white);
+  }
+}
+
+.link {
+  color: var(--light-purple);
+
+  &.link:hover {
+    outline: solid 2px var(--light-purple);
+  }
+
+  //Annoyingly, needs repeating even tho' it's in %link-variant. Specificity issue and extend won't work for this one style property
+  &:focus-visible:hover {
+    outline: var(--js-yellow) dashed 2px;
+  }
+}
