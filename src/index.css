@@ -1,3 +1,4 @@
+@import './styles/buttons.scss';
 @import './styles/colors.css';
 @import './styles/typography.css';
 
@@ -64,24 +65,24 @@ h3, h4 {
     text-wrap: balance;
 }
 
-a {
-    font-weight: 500;
-    color: var(--light-purple);
-    text-decoration: inherit;
-    opacity: 0.8;
-    transition: color 0.3s ease-in-out;
-}
+/*a {*/
+/*    font-weight: 500;*/
+/*    color: var(--light-purple);*/
+/*    text-decoration: inherit;*/
+/*    opacity: 0.8;*/
+/*    transition: color 0.3s ease-in-out;*/
+/*}*/
 
-a:focus {
-    outline: var(--purple) dashed 2px;
-    outline-offset: 2px;
-    color: var(--off-white);
-}
+/*a:focus {*/
+/*    outline: var(--purple) dashed 2px;*/
+/*    outline-offset: 2px;*/
+/*    color: var(--off-white);*/
+/*}*/
 
-a:hover {
-    color: var(--purple);
-    border-bottom: var(--purple) solid 2px;
-}
+/*a:hover {*/
+/*    color: var(--purple);*/
+/*    border-bottom: var(--purple) solid 2px;*/
+/*}*/
 
 /* A elements that don't have a class get default styles */
 a:not([class]) {
