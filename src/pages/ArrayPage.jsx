@@ -1,11 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { arrayMethods } from '../lib/arrayMethods';
-import './HomePage.css';
+import { initializeArrayCards } from '../lib/localStorageCards.js';
+import './ArrayPage.css';
 import diagramArray from '../assets/diagram_array.png';
 
-function HomePage() {
+function ArrayPage() {
     let navigate = useNavigate();
+
+    useEffect(() => {
+        //adds 37 array methods to local storage
+        initializeArrayCards();
+    }, []);
 
     const handleCardClick = (arrayMethod) => {
         navigate(`/arrays/${arrayMethod.id}`);
@@ -46,4 +52,4 @@ function HomePage() {
     );
 }
 
-export default HomePage;
+export default ArrayPage;

@@ -85,9 +85,9 @@ function ArrayMethodPage() {
                 Create four paragraphs, with the headings for each section. 
                 First, under the EXPLANATION heading, explain "array.Prototype.${array_method}()". 
                 Then, under the SYNTAX heading, provide the syntax. 
-                Next, under the EXAMPLES heading, give two examples.
+                Next, under the EXAMPLES heading, give a simple example and a more difficult real-world example.
                 Finally, under the EXERCISES heading, write two exercises to test the reader's understanding. 
-                The first exercise should be easy. The second challenge should be challenging. 
+                The first exercise should be easy. The second challenge should be challenging and be used in real-world apps like email, to do lists or streaming apps. 
                 Just provide the question.
                 Thanks very much.`;
             try {
