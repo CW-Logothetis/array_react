@@ -8,12 +8,12 @@ import './App.css';
 
 function App() {
     return (
-        <Routes>
-            <Route path="/" element={<HomePage/>}/>
-            <Route path="/study/:array_method" element={<StudyPage/>}/>
-            <Route path="/arrays" element={<ArrayPage/>}/>
-            <Route path="/arrays/:array_method" element={<ArrayMethodPage/>}/>
-        </Routes>
+            <Routes>
+                <Route path="/" element={<HomePage/>}/>
+                <Route path="/study" element={<StudyPage/>}/>
+                <Route path="/arrays" element={<ArrayPage/>}/>
+                <Route path="/arrays/:array_method" element={<ArrayMethodPage/>}/>
+            </Routes>
     );
 }
 

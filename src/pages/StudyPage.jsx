@@ -1,22 +1,35 @@
 import React, {useEffect, useState} from 'react';
 import OpenAI from "openai";
-import {useParams} from "react-router-dom";
+import { useLocation } from 'react-router-dom';
 import {styleHeadings} from "../utils/styleHeadings.js";
+import {updateCard} from "../lib/localStorageCards.js";
 import './StudyPage.css';
 
 function StudyPage() {
+    const location = useLocation();
+    const currentCard = location.state?.card;
+    console.log({currentCard})
+
+    if (!currentCard) {
+        return <div>Please select a card to study.</div>;
+    }
+
     // TODO: temp allow browser whilst testing locally. Remove when deploy to Vercel.
     const openai = new OpenAI({
         apiKey: import.meta.env.VITE_OPENAI_API_KEY,
         dangerouslyAllowBrowser: true
     })
 
-    const {array_method} = useParams();
-    console.log(array_method)
+    const array_method = currentCard.name;
+    const cardId = currentCard.id;
 
     const [output, setOutput] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const handleScore = (cardId, score) => {
+        updateCard(cardId, score);
+    };
 
     // Decided to use async/await try/catch rather than Promises with  .then .catch
     // Therefore, IIFE used to execute async function immediately.
@@ -75,10 +88,17 @@ function StudyPage() {
                         <div style={{textAlign: "left", fontSize: "var(--step-0)", maxWidth: "80ch", margin: "0 auto"}}
                              dangerouslySetInnerHTML={{__html: styleHeadings(output)}}/>
                     )}
+                    <div>
+                        <button onClick={() => handleScore(cardId, 'Again')}>Again</button>
+                        <button onClick={() => handleScore(cardId, 'Hard')}>Hard</button>
+                        <button onClick={() => handleScore(cardId, 'Good')}>Good</button>
+                        <button onClick={() => handleScore(cardId, 'Easy')}>Easy</button>
+                    </div>
                 </section>
                 <div></div>
             </div>
         </div>
     );
 }
+
 export default StudyPage;
