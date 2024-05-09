@@ -89,12 +89,36 @@ export function getDueCards() {
     return cards.filter(card => card.nextDue.split('T')[0] <= today);
 }
 
+// Interval: For "Again" and "Hard", interval is either reset or slightly increased.
+//           For "Good" and "Easy", interval * ease factor, with "Easy" getting a larger multiplier.
+// Ease: adjusted slightly down for "Again" and "Hard" and up for "Easy". Affects how quickly intervals increase in the future.
+// Date: `lastReviewed` updated to current date. And `nextDue` calculated from new interval.
 export function updateCard(cardId, score) {
-    const cards = getCards();
+    const cards = JSON.parse(localStorage.getItem('cards') || '[]');
     const card = cards.find(c => c.id === cardId);
     const currentDate = new Date();
 
-    // Implement scoring logic here as previously described
-    // Update card details in localStorage
+    switch (score) {
+        case 'Again':
+            card.interval = 1; // Reset interval to 1 day
+            card.easeFactor = Math.max(1.3, card.easeFactor - 0.2); // Decrease ease factor, minimum 1.3
+            break;
+        case 'Hard':
+            card.interval = Math.max(1, card.interval * 1.2); // Increase interval slightly
+            card.easeFactor = Math.max(1.3, card.easeFactor - 0.1); // Slightly decrease ease factor
+            break;
+        case 'Good':
+            card.interval *= card.easeFactor; // Increase interval by ease factor
+            break;
+        case 'Easy':
+            card.interval *= card.easeFactor * 1.3; // Significantly increase interval
+            card.easeFactor += 0.1; // Increase ease factor
+            break;
+    }
+
+    card.lastReviewed = currentDate.toISOString();
+    card.nextDue = new Date(currentDate.getTime() + card.interval * 24 * 60 * 60 * 1000).toISOString();
+    console.log({card})
+
     localStorage.setItem('cards', JSON.stringify(cards));
 }
