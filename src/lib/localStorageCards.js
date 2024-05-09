@@ -47,14 +47,50 @@ export function initializeArrayCards() {
     }
 }
 
+function getTodayDate() {
+    return new Date().toISOString().split('T')[0];
+}
+
+function getCards() {
+    return JSON.parse(localStorage.getItem('cards') || '[]'); // [] prevents a falsy value breaking code later
+}
+
+// cards not learnt/reviewed yet
+function getNewCards(cards) {
+    return cards.filter(card => !card.lastReviewed);
+}
+
+// Learning cards (been answered >= once) and due for review today
+function getLearningCards(cards) {
+    const today = getTodayDate();
+    return cards.filter(card => card.lastReviewed && card.nextDue.split('T')[0] <= today && card.interval <= 1);
+}
+
+// Cards that were 'learnt' and now in review phase, and due for review today.
+function getReviewCards(cards) {
+    const today = getTodayDate();
+    return cards.filter(card => card.lastReviewed && card.nextDue.split('T')[0] <= today && card.interval > 1);
+}
+
+// fetch cards for today and combine them. Prioritise New cards, then Learning, then Review.
+export function getCardsForStudySession() {
+    const cards = getCards(); // Fetch and parse once. Replace later with DB
+    const newCards = getNewCards(cards);
+    const learningCards = getLearningCards(cards);
+    const reviewCards = getReviewCards(cards);
+    const sessionCards = [...newCards, ...learningCards, ...reviewCards];
+    return sessionCards;
+}
+
+// gets stats for cards due today, whether new, learning or to review (note it doesn't look at interval)
 export function getDueCards() {
-    const today = new Date().toISOString().split('T')[0];
-    const cards = JSON.parse(localStorage.getItem('cards'));
+    const today = getTodayDate();
+    const cards = getCards();
     return cards.filter(card => card.nextDue.split('T')[0] <= today);
 }
 
 export function updateCard(cardId, score) {
-    const cards = JSON.parse(localStorage.getItem('cards'));
+    const cards = getCards();
     const card = cards.find(c => c.id === cardId);
     const currentDate = new Date();
 
