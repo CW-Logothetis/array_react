@@ -1,65 +1,18 @@
-import React, {useState, useEffect} from 'react';
-import {useParams} from 'react-router-dom';
-import OpenAI from 'openai';
-import {styleHeadings} from '../utils/styleHeadings';
-import {arrayMethods} from "../lib/arrayMethods.js";
-import {NavLink} from 'react-router-dom';
-import './ArrayMethodPage.css';
+import React, {useEffect, useState} from 'react';
+import OpenAI from "openai";
+import { useLocation } from 'react-router-dom';
+import {styleHeadings} from "../utils/styleHeadings.js";
+import {updateCard} from "../lib/localStorageCards.js";
+import './StudyPage.css';
 
-/**
- * Splits an array into three separate arrays based on the starting letter.
- * Methods that start with A-M, N-Z, and misc (non A-Z) are put into separate arrays.
- *
- * @param {Object[]} arr - Array of method objects with an 'id' field.
- * @returns {Object} An object with three arrays categorizing the list of methods.
- */
-function splitArrayByAlphabet(arr) {
+function StudyPage() {
+    const location = useLocation();
+    const currentCard = location.state?.card;
+    console.log({currentCard})
 
-    let arrayAtoM = [];
-    let arrayNtoZ = [];
-    let arrayMisc = []
-
-    arr.forEach(obj => {
-        const firstLetter = obj.id.charAt(0).toUpperCase();
-        if (firstLetter >= 'A' && firstLetter <= 'M') {
-            arrayAtoM.push(obj);
-        } else if (firstLetter >= 'N' && firstLetter <= 'Z') {
-            arrayNtoZ.push(obj);
-        }
-        // first letter should always be A-Z, but just in case, put in last column
-        else arrayMisc.push(obj);
-    });
-
-    return { arrayAtoM, arrayNtoZ, arrayMisc };
-}
-
-const { arrayAtoM, arrayNtoZ, arrayMisc } = splitArrayByAlphabet(arrayMethods);
-
-/**
- * Renders a list of array methods as navigation links.
- *
- * @param {Object[]} array - Array of method objects.
- * @returns {React.ReactNode} The component's rendered output as a list.
- */
-const renderList = (array) => (
-    <ul>
-        {array.map(method => (
-            <li key={method.id}>
-                <NavLink to={`/arrays/${method.id}`} className="button text-only">
-                    {method.method}
-                </NavLink>
-            </li>
-        ))}
-    </ul>
-);
-
-
-/**
- * The main component for displaying a page with array methods and content from OpenAI.
- *
- * @returns {React.ReactNode} The component's rendered output.
- */
-function ArrayMethodPage() {
+    if (!currentCard) {
+        return <div>Please select a card to study.</div>;
+    }
 
     // TODO: temp allow browser whilst testing locally. Remove when deploy to Vercel.
     const openai = new OpenAI({
@@ -67,11 +20,16 @@ function ArrayMethodPage() {
         dangerouslyAllowBrowser: true
     })
 
-    const {array_method} = useParams();
+    const array_method = currentCard.name;
+    const cardId = currentCard.id;
 
     const [output, setOutput] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    const handleScore = (cardId, score) => {
+        updateCard(cardId, score);
+    };
 
     // Decided to use async/await try/catch rather than Promises with  .then .catch
     // Therefore, IIFE used to execute async function immediately.
@@ -85,9 +43,9 @@ function ArrayMethodPage() {
                 Create four paragraphs, with the headings for each section. 
                 First, under the EXPLANATION heading, explain "array.Prototype.${array_method}()". 
                 Then, under the SYNTAX heading, provide the syntax. 
-                Next, under the EXAMPLES heading, give two examples.
+                Next, under the EXAMPLES heading, give a simple example and a more difficult real-world example.
                 Finally, under the EXERCISES heading, write two exercises to test the reader's understanding. 
-                The first exercise should be easy. The second challenge should be challenging. 
+                The first exercise should be easy. The second challenge should be challenging and be used in real-world apps like email, to do lists or streaming apps. 
                 Just provide the question.
                 Thanks very much.`;
             try {
@@ -121,17 +79,8 @@ function ArrayMethodPage() {
     // TODO: going to trust OpenAI to be serving safe HTML, but could add DOMPurify
     return (
         <div>
-            <header>
-                <nav>
-                    <NavLink to="/" className="button text-only">Home</NavLink>
-                </nav>
-            </header>
             <div className="cont">
-                <section className="method-menu">
-                    {renderList(arrayAtoM)}
-                    {renderList(arrayNtoZ)}
-                    {renderList(arrayMisc)}
-                </section>
+                <div></div>
                 <section>
                     {loading && <p>Loading...</p>}
                     {!loading && error && <p>Error: {error}</p>}
@@ -139,10 +88,17 @@ function ArrayMethodPage() {
                         <div style={{textAlign: "left", fontSize: "var(--step-0)", maxWidth: "80ch", margin: "0 auto"}}
                              dangerouslySetInnerHTML={{__html: styleHeadings(output)}}/>
                     )}
+                    <div>
+                        <button onClick={() => handleScore(cardId, 'Again')}>Again</button>
+                        <button onClick={() => handleScore(cardId, 'Hard')}>Hard</button>
+                        <button onClick={() => handleScore(cardId, 'Good')}>Good</button>
+                        <button onClick={() => handleScore(cardId, 'Easy')}>Easy</button>
+                    </div>
                 </section>
+                <div></div>
             </div>
         </div>
     );
 }
 
-export default ArrayMethodPage;
+export default StudyPage;
