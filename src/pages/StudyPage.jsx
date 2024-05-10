@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import OpenAI from "openai";
-import { useLocation } from 'react-router-dom';
+import {useLocation} from 'react-router-dom';
 import {styleHeadings} from "../utils/styleHeadings.js";
 import {updateCard} from "../lib/localStorageCards.js";
 import './StudyPage.css';
@@ -23,13 +23,48 @@ function StudyPage() {
     const array_method = currentCard.name;
     const cardId = currentCard.id;
 
-    const [output, setOutput] = useState(null);
+    const [exercises, setExercises] = useState(null);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [showAnswers, setShowAnswers] = useState(false);
+
+    const handleSubmit = () => {
+        setShowAnswers(true); // Change state to show answers and other content
+    };
 
     const handleScore = (cardId, score) => {
         updateCard(cardId, score);
     };
+
+    const Exercise = ({loading, error, question, labelId, labelText, showAnswers, fakeData, answer, consoleLog}) => (
+
+            <div className="stack">
+                <h3>{labelText}</h3>
+                {loading && <p>Loading exercises...</p>}
+                {!loading && error && <p>Error: {error}</p>}
+                {!loading && !error && question && (
+                    <div className="stack">
+                        <p>{question}</p>
+
+                        <div className="exercise-container stack">
+                            <div style={{display: 'flex', flexDirection: 'column'}} className="stack">
+                                <label htmlFor={labelId}>Your code:</label>
+                                <textarea id={labelId} name={labelId} rows="4" cols="50"
+                                          aria-label={`Enter your answer to the ${labelText.toLowerCase()} exercise here`}/>
+                            </div>
+                                {showAnswers && (
+                                    <div className="exercise-answer">
+                                        <h3>Answer</h3>
+                                        <pre>{answer}</pre>
+                                        {/*<pre>//Console: {consoleLog}</pre>*/}
+                                    </div>
+                                )}
+                        </div>
+
+                    </div>
+                )}
+            </div>
+    );
 
     // Decided to use async/await try/catch rather than Promises with  .then .catch
     // Therefore, IIFE used to execute async function immediately.
@@ -39,25 +74,33 @@ function StudyPage() {
         (async () => {
             const prompt = `
                 You are an experienced teacher of JavaScript and a senior front end developer.
-                You specialise in explaining JavaScript to beginners in layman terms, with real world examples.
-                Create four paragraphs, with the headings for each section. 
-                First, under the EXPLANATION heading, explain "array.Prototype.${array_method}()". 
-                Then, under the SYNTAX heading, provide the syntax. 
-                Next, under the EXAMPLES heading, give a simple example and a more difficult real-world example.
-                Finally, under the EXERCISES heading, write two exercises to test the reader's understanding. 
-                The first exercise should be easy. The second challenge should be challenging and be used in real-world apps like email, to do lists or streaming apps. 
-                Just provide the question.
-                Thanks very much.`;
+                You specialize in explaining JavaScript to beginners in layman terms, with real-world examples.
+                Please create a JSON object with the following structure:
+                {
+                    "explanation": "Provide a succinct but sufficient explanation of array.Prototype.${array_method}().",
+                    "syntax": "Provide the syntax for array.Prototype.${array_method}(), detailing any parameters in the method's API.",
+                    "simple_exercise": {
+                        "exercise": "Provide a simple question to test basic understanding of array.Prototype.${array_method}().",
+                        "explanation": "Provide the answer to the simple exercise as a JavaScript function, with a console.log to output the result, and explain how and why you did it. Wrap any code in HTML pre or code tags where relevant."
+                    },
+                    "challenging_exercise": {
+                        "exercise": "Provide a challenging question suitable for real-world applications like email systems, to-do lists, or streaming apps.",
+                        "explanation": "Provide the answer to the advanced exercise as a JavaScript function, with a console.log to output the result, and explain how and why you did it. Wrap any code in HTML pre or code tags where relevant."
+                    }
+                }
+                Please wrap any code that you return in HTML pre or code tags.
+                Return this JSON object. Thank you.`;
             try {
                 setLoading(true);
                 setError(null); // Reset error state
                 const response = await openai.chat.completions.create({
-                    max_tokens: 500,
-                    temperature: 0.7, // Controls the randomness of the output
+                    max_tokens: 700,
+                    temperature: 0.1, // Controls the randomness of the output
+                    response_format: {type: "json_object"},
                     messages: [
                         {
                             "role": "system",
-                            "content": "You are teacher and educator, specialising in teaching beginners about modern JavaScript."
+                            "content": "You are a teacher and educator, specializing in teaching beginners about modern JavaScript. Please return responses in JSON format."
                         },
                         {
                             "role": "user",
@@ -67,7 +110,10 @@ function StudyPage() {
                     model: 'gpt-3.5-turbo-1106'
                 });
                 console.log(response.choices[0].message.content);
-                setOutput(response.choices[0].message.content);
+                // setOutput(response.choices[0].message.content);
+                const exercises = JSON.parse(response.choices[0].message.content);
+                setExercises(exercises); // Store the exercises in state
+                console.log(exercises);
             } catch (err) {
                 console.error('Error fetching completion:', err);
                 setError('Failed to fetch data from OpenAI');
@@ -79,20 +125,67 @@ function StudyPage() {
     // TODO: going to trust OpenAI to be serving safe HTML, but could add DOMPurify
     return (
         <div>
-            <div className="cont">
+            <div className="cont stack">
                 <div></div>
-                <section>
-                    {loading && <p>Loading...</p>}
-                    {!loading && error && <p>Error: {error}</p>}
-                    {!loading && !error && output && (
-                        <div style={{textAlign: "left", fontSize: "var(--step-0)", maxWidth: "80ch", margin: "0 auto"}}
-                             dangerouslySetInnerHTML={{__html: styleHeadings(output)}}/>
+
+                <section className="stack">
+                    <h1>{array_method}()</h1>
+                    <div className="underline"></div>
+
+                    <h3>Explanation</h3>
+                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                        <label id="explanation-desc" htmlFor="explanation">Try write an explanation and/or pseudocode.</label>
+                        <textarea id="explanation" name="explanation" rows="4" cols="50"
+                                  aria-describedby="explanation-desc"></textarea>
+                    </div>
+
+                    {showAnswers && (
+                        <div className="exercise-answer">
+                            <h3>Answer</h3>
+                            <p>{exercises.explanation}</p>
+                            <h4>Syntax</h4>
+                            <pre>{exercises.syntax}</pre>
+                        </div>
                     )}
+
+
+                    <div className="underline"></div>
+
+                    <h2>Exercises</h2>
+
+                        <Exercise
+                            loading={loading}
+                            error={error}
+                            question={exercises && exercises.simple_exercise.exercise}
+                            fakeData={exercises && exercises.simple_exercise.fake_data}
+                            labelId="simple"
+                            labelText="Simple Exercise"
+                            showAnswers={showAnswers}
+                            answer={exercises && exercises.simple_exercise.explanation}
+                        />
+                        <Exercise
+                            loading={loading}
+                            error={error}
+                            question={exercises && exercises.challenging_exercise.exercise}
+                            fakeData={exercises && exercises.challenging_exercise.fake_data}
+                            labelId="challenging"
+                            labelText="Challenging Exercise"
+                            showAnswers={showAnswers}
+                            answer={exercises && exercises.challenging_exercise.explanation}
+                            consoleLog={exercises && exercises.challenging_exercise.console}
+                        />
+
+                    <div className="underline"></div>
                     <div>
-                        <button onClick={() => handleScore(cardId, 'Again')}>Again</button>
-                        <button onClick={() => handleScore(cardId, 'Hard')}>Hard</button>
-                        <button onClick={() => handleScore(cardId, 'Good')}>Good</button>
-                        <button onClick={() => handleScore(cardId, 'Easy')}>Easy</button>
+                        {!showAnswers && (<button onClick={handleSubmit}>Show Answers</button>)}
+                        {showAnswers && (
+                            <div>
+                                <button onClick={() => handleScore(cardId, 'Again')}>Again</button>
+                                <button onClick={() => handleScore(cardId, 'Hard')}>Hard</button>
+                                <button onClick={() => handleScore(cardId, 'Good')}>Good</button>
+                                <button onClick={() => handleScore(cardId, 'Easy')}>Easy</button>
+                            </div>
+                        )}
                     </div>
                 </section>
                 <div></div>
