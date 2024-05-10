@@ -1,13 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import OpenAI from "openai";
 import {useLocation} from 'react-router-dom';
-import {styleHeadings} from "../utils/styleHeadings.js";
-import {updateCard} from "../lib/localStorageCards.js";
+import {getNextCard, updateCard} from "../lib/localStorageCards.js";
 import './StudyPage.css';
 
 function StudyPage() {
     const location = useLocation();
-    const currentCard = location.state?.card;
+    const [currentCard, setCurrentCard] = useState(location.state?.card);
     console.log({currentCard})
 
     if (!currentCard) {
@@ -29,14 +28,18 @@ function StudyPage() {
     const [showAnswers, setShowAnswers] = useState(false);
 
     const handleSubmit = () => {
-        setShowAnswers(true); // Change state to show answers and other content
+        setShowAnswers(true);
     };
 
-    const handleScore = (cardId, score) => {
-        updateCard(cardId, score);
+    const handleScore = async (cardId, score) => {
+        await updateCard(cardId, score); // TODO does updateCard need to be an async function?
+        const nextCard = getNextCard();
+        setCurrentCard(nextCard);
+        setShowAnswers(false);
+        setExercises(null);
     };
 
-    const Exercise = ({loading, error, question, labelId, labelText, showAnswers, fakeData, answer, consoleLog}) => (
+    const Exercise = ({loading, error, question, labelId, labelText, showAnswers, answer}) => (
 
             <div className="stack">
                 <h3>{labelText}</h3>
@@ -56,7 +59,6 @@ function StudyPage() {
                                     <div className="exercise-answer">
                                         <h3>Answer</h3>
                                         <pre>{answer}</pre>
-                                        {/*<pre>//Console: {consoleLog}</pre>*/}
                                     </div>
                                 )}
                         </div>
@@ -95,7 +97,7 @@ function StudyPage() {
                 setError(null); // Reset error state
                 const response = await openai.chat.completions.create({
                     max_tokens: 700,
-                    temperature: 0.1, // Controls the randomness of the output
+                    temperature: 0.1,
                     response_format: {type: "json_object"},
                     messages: [
                         {
@@ -110,10 +112,8 @@ function StudyPage() {
                     model: 'gpt-3.5-turbo-1106'
                 });
                 console.log(response.choices[0].message.content);
-                // setOutput(response.choices[0].message.content);
                 const exercises = JSON.parse(response.choices[0].message.content);
                 setExercises(exercises); // Store the exercises in state
-                console.log(exercises);
             } catch (err) {
                 console.error('Error fetching completion:', err);
                 setError('Failed to fetch data from OpenAI');

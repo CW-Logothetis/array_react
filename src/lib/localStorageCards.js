@@ -91,8 +91,8 @@ export function getDueCards() {
 
 // Interval: For "Again" and "Hard", interval is either reset or slightly increased.
 //           For "Good" and "Easy", interval * ease factor, with "Easy" getting a larger multiplier.
-// Ease: adjusted slightly down for "Again" and "Hard" and up for "Easy". Affects how quickly intervals increase in the future.
-// Date: `lastReviewed` updated to current date. And `nextDue` calculated from new interval.
+// Ease:     adjusted slightly down for "Again" and "Hard" and up for "Easy". Affects how quickly intervals increase in the future.
+// Date:     `lastReviewed` updated to current date. And `nextDue` calculated from new interval.
 export function updateCard(cardId, score) {
     const cards = JSON.parse(localStorage.getItem('cards') || '[]');
     const card = cards.find(c => c.id === cardId);
@@ -121,4 +121,10 @@ export function updateCard(cardId, score) {
     console.log({card})
 
     localStorage.setItem('cards', JSON.stringify(cards));
+}
+
+export function getNextCard() {
+    const cards = JSON.parse(localStorage.getItem('cards'));
+    const sortedCards = cards.filter(card => !card.lastReviewed || new Date(card.nextDue) <= new Date());
+    return sortedCards.length > 0 ? sortedCards[0] : null;
 }
