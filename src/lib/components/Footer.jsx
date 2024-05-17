@@ -5,7 +5,7 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
     return (
         <footer>
-            <p>&copy; {currentYear} CW Mounsey-Logothetis</p>
+            <p style={{fontSize: 'var(--step--1)'}}>MethodMinder &nbsp; &copy; {currentYear} &nbsp; C.W. Mounsey-Logothetis</p>
         </footer>
     );
 };

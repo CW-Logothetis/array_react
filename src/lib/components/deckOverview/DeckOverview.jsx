@@ -1,9 +1,10 @@
 import React from 'react';
+import './DeckOverview.scss';
 
 function DeckOverview({ onDeckClick, stats }) {
     return (
         <div>
-            <table style={{ margin: 'auto', width: '50%', tableLayout: 'auto' }}>
+            <table style={{ margin: 'auto', width: '70%', tableLayout: 'auto' }}>
                 <thead>
                 <tr>
                     <th style={{ width: 'auto' }}>Deck</th>
@@ -13,7 +14,7 @@ function DeckOverview({ onDeckClick, stats }) {
                 </tr>
                 </thead>
                 <tbody>
-                <tr onClick={onDeckClick} style={{cursor: 'pointer'}}>
+                <tr onClick={onDeckClick} className="e: deck-name" style={{cursor: 'pointer'}}>
                     <td>Array</td>
                     <td>{stats.new}</td>
                     <td>{stats.learning}</td>

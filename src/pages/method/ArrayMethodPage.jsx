@@ -61,7 +61,7 @@ const renderList = (array) => (
  */
 function ArrayMethodPage() {
 
-    // TODO: temp allow browser whilst testing locally. Remove when deploy to Vercel.
+    // TODO: temp allow browser whilst testing locally. Need to add server.
     const openai = new OpenAI({
         apiKey: import.meta.env.VITE_OPENAI_API_KEY,
         dangerouslyAllowBrowser: true
@@ -86,16 +86,13 @@ function ArrayMethodPage() {
                 First, under the EXPLANATION heading, explain "array.Prototype.${array_method}()". 
                 Then, under the SYNTAX heading, provide the syntax. 
                 Next, under the EXAMPLES heading, give a simple example and a more difficult real-world example.
-                Finally, under the EXERCISES heading, write two exercises to test the reader's understanding. 
-                The first exercise should be easy. The second challenge should be challenging and be used in real-world apps like email, to do lists or streaming apps. 
-                Just provide the question.
                 Thanks very much.`;
             try {
                 setLoading(true);
                 setError(null); // Reset error state
                 const response = await openai.chat.completions.create({
-                    max_tokens: 500,
-                    temperature: 0.7, // Controls the randomness of the output
+                    max_tokens: 1000,
+                    temperature: 0.2, // Controls the randomness of the output
                     messages: [
                         {
                             "role": "system",
@@ -106,7 +103,7 @@ function ArrayMethodPage() {
                             "content": prompt
                         }
                     ],
-                    model: 'gpt-3.5-turbo-1106'
+                    model: 'gpt-4o'
                 });
                 console.log(response.choices[0].message.content);
                 setOutput(response.choices[0].message.content);
@@ -121,11 +118,6 @@ function ArrayMethodPage() {
     // TODO: going to trust OpenAI to be serving safe HTML, but could add DOMPurify
     return (
         <div>
-            <header>
-                <nav>
-                    <NavLink to="/" className="button text-only">Home</NavLink>
-                </nav>
-            </header>
             <div className="cont">
                 <section className="method-menu">
                     {renderList(arrayAtoM)}
