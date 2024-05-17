@@ -89,7 +89,3 @@ pre, code, textarea {
     border-bottom: 3px solid white;
     margin-block: 2rem;
 }
-
-.stack * + * {
-    margin-block-end: 1.5rem;
-}
