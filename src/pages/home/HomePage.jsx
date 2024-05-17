@@ -1,43 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import {initializeArrayCards, getDueCards, updateCard} from '../../lib/mvpStorage/localStorageCards.js';
-import './HomePage.css';
-import DeckOverview from "../../lib/components/DeckOverview.jsx";
+import DeckOverview from "../../lib/components/deckOverview/DeckOverview.jsx";
 import DeckSummary from "../../lib/components/DeckSummary.jsx";
+import './HomePage.css';
 
 function HomePage() {
-    // const [dueCards, setDueCards] = useState([]);
-    //
-    // useEffect(() => {
-    //     initializeArrayCards();
-    //     refreshDueCards();
-    // }, []);
-    //
-    // const refreshDueCards = () => {
-    //     setDueCards(getDueCards());
-    // };
-    //
-    // const handleScore = (cardId, score) => {
-    //     updateCard(cardId, score);
-    //     refreshDueCards();
-    // };
-
-    // return (
-    //     <div>
-    //         <h1>Due Cards</h1>
-    //         <ul>
-    //             {dueCards.map(card => (
-    //                 <li key={card.id}>
-    //                     {card.name}
-    //                     <button onClick={() => handleScore(card.id, 'Again')}>Again</button>
-    //                     <button onClick={() => handleScore(card.id, 'Hard')}>Hard</button>
-    //                     <button onClick={() => handleScore(card.id, 'Good')}>Good</button>
-    //                     <button onClick={() => handleScore(card.id, 'Easy')}>Easy</button>
-    //                 </li>
-    //             ))}
-    //         </ul>
-    //     </div>
-    // );
-
     const [showSummary, setShowSummary] = useState(false);
     const [stats, setStats] = useState({new: 0, learning: 0, toReview: 0});
 
@@ -79,20 +45,19 @@ function HomePage() {
     }
 
     return (
-        <div>
-            {showSummary ? (
-                <div>
-                    <button onClick={() => setShowSummary(false)}>back to Decks</button>
-                    <DeckSummary stats={stats}/>
-                </div>
-            ) : (
-
-                <DeckOverview onDeckClick={handleDeckClick} stats={stats}/>
-
-            )}
+        <div >
+            <div className="stack" style={{margin: 'auto', width: '50%'}}>
+                {showSummary ? (
+                    <div style={{margin: 'auto', width: '70%'}}>
+                        <DeckSummary stats={stats}/>
+                        <button className="c: button" style={{marginBlockEnd: '1.5rem'}} onClick={() => setShowSummary(false)}>back to Decks</button>
+                    </div>
+                ) : (
+                    <DeckOverview onDeckClick={handleDeckClick} stats={stats}/>
+                )}
+            </div>
         </div>
     );
-
 }
 
 export default HomePage;

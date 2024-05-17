@@ -3,7 +3,7 @@ import React from 'react';
 function DeckOverview({ onDeckClick, stats }) {
     return (
         <div>
-            <table style={{ margin: 'auto', width: '50%', tableLayout: 'auto' }}>
+            <table style={{ margin: 'auto', width: '70%', tableLayout: 'auto' }}>
                 <thead>
                 <tr>
                     <th style={{ width: 'auto' }}>Deck</th>

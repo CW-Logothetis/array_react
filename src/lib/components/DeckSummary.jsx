@@ -20,12 +20,12 @@ function DeckSummary({ stats }) {
     };
 
     return (
-        <div style={{ margin: 'auto', width: '50%' }}>
-            <h2>Deck Summary</h2>
+        <div style={{ margin: 'auto' }}>
+            <h2 style={{ fontSize: '1rem' }}>DECK SUMMARY</h2>
             <p>New: {stats.new}</p>
             <p>Learning: {stats.learning}</p>
             <p>To Review: {stats.toReview}</p>
-            <button onClick={handleStudyClick}>Study</button>
+            <button className="c: button" onClick={handleStudyClick}>Study</button>
         </div>
     );
 }
