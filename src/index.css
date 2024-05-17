@@ -27,8 +27,8 @@ html {
     -moz-text-size-adjust: none;
     -webkit-text-size-adjust: none;
     text-size-adjust: none;
-
     background: var(--background);
+    color: var(--off-white);
     /* scrollbar-gutter: stable; */
     overflow-y: scroll;
 }
@@ -111,19 +111,6 @@ textarea:not([rows]) {
 /* Anything that has been anchored to should have extra scroll margin */
 :target {
     scroll-margin-block: 5ex;
-}
-
-nav {
-    padding: 1rem;
-    margin: 0 auto;
-}
-
-nav > a {
-    color: var(--off-white);
-    font-size: var(--step-0);
-    font-weight: 500;
-    letter-spacing: 0.1px;
-    text-decoration: none;
 }
 
 

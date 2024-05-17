@@ -1,5 +1,5 @@
 .cont h2, .cont p {
-    color: white;
+    color: var(--off-white);
     margin-block-end: 1.5rem;
 }
 
