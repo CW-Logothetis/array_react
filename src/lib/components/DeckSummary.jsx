@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from "react-router-dom";
-import {getCardsForStudySession} from "../localStorageCards.js";
+import {getCardsForStudySession} from "../mvpStorage/localStorageCards.js";
 
 function DeckSummary({ stats }) {
     let navigate = useNavigate();

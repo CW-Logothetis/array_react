@@ -1,6 +1,6 @@
-@import './styles/buttons.scss';
-@import './styles/colors.css';
-@import './styles/typography.css';
+@import 'assets/styles/buttons.scss';
+@import 'assets/styles/colors.css';
+@import 'assets/styles/typography.css';
 
 :root {
     font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;

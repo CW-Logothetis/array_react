@@ -1,8 +1,8 @@
 import React from 'react';
 import {Link, NavLink} from 'react-router-dom';
-import logo from '../../assets/logo_methodMinder.png'
+import logo from '../../assets/images/logo_methodMinder.png'
 
-import '../css/layout.css'
+import './layout/layout.css'
 
 export default function Header() {
 
