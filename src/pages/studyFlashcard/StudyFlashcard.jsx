@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import OpenAI from "openai";
 import {useLocation} from 'react-router-dom';
-import {getNextCard, updateCard} from "../lib/localStorageCards.js";
-import './StudyPage.css';
+import {getNextCard, updateCard} from "../../lib/mvpStorage/localStorageCards.js";
+import './StudyFlashcard.css';
 
-function StudyPage() {
+function StudyFlashcard() {
     const location = useLocation();
     const [currentCard, setCurrentCard] = useState(location.state?.card);
     console.log({currentCard})
@@ -194,4 +194,4 @@ function StudyPage() {
     );
 }
 
-export default StudyPage;
+export default StudyFlashcard;

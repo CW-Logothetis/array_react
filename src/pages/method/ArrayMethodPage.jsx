@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import OpenAI from 'openai';
-import {styleHeadings} from '../utils/styleHeadings';
-import {arrayMethods} from "../lib/arrayMethods.js";
+import {styleHeadings} from '../../utils/styleHeadings.js';
+import {arrayMethods} from "../../lib/mvpStorage/arrayMethods.js";
 import {NavLink} from 'react-router-dom';
 import './ArrayMethodPage.css';
 

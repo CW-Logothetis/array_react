@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {initializeArrayCards, getDueCards, updateCard} from '../lib/localStorageCards.js';
+import {initializeArrayCards, getDueCards, updateCard} from '../../lib/mvpStorage/localStorageCards.js';
 import './HomePage.css';
-import DeckOverview from "../lib/components/DeckOverview.jsx";
-import DeckSummary from "../lib/components/DeckSummary.jsx";
+import DeckOverview from "../../lib/components/DeckOverview.jsx";
+import DeckSummary from "../../lib/components/DeckSummary.jsx";
 
 function HomePage() {
     // const [dueCards, setDueCards] = useState([]);
