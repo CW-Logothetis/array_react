@@ -106,7 +106,7 @@ function ArrayMethodPage() {
                             "content": prompt
                         }
                     ],
-                    model: 'gpt-3.5-turbo-1106'
+                    model: 'gpt-4o'
                 });
                 console.log(response.choices[0].message.content);
                 setOutput(response.choices[0].message.content);
