@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { arrayMethods } from '../lib/arrayMethods';
 import { initializeArrayCards } from '../lib/localStorageCards.js';
 import './ArrayPage.css';
-import diagramArray from '../assets/diagram_array.png';
+import diagramArray from '../assets/images/diagram_array.png';
 
 function ArrayPage() {
     let navigate = useNavigate();
