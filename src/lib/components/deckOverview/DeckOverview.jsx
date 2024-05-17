@@ -1,4 +1,5 @@
 import React from 'react';
+import './DeckOverview.scss';
 
 function DeckOverview({ onDeckClick, stats }) {
     return (
@@ -13,7 +14,7 @@ function DeckOverview({ onDeckClick, stats }) {
                 </tr>
                 </thead>
                 <tbody>
-                <tr onClick={onDeckClick} style={{cursor: 'pointer'}}>
+                <tr onClick={onDeckClick} className="e: deck-name" style={{cursor: 'pointer'}}>
                     <td>Array</td>
                     <td>{stats.new}</td>
                     <td>{stats.learning}</td>

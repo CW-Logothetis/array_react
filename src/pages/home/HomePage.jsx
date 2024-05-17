@@ -50,7 +50,7 @@ function HomePage() {
                 {showSummary ? (
                     <div style={{margin: 'auto', width: '70%'}}>
                         <DeckSummary stats={stats}/>
-                        <button className="c: button" style={{marginBlockEnd: '1.5rem'}} onClick={() => setShowSummary(false)}>back to Decks</button>
+                        <button className="c: button outline" style={{marginBlockEnd: '1.5rem'}} onClick={() => setShowSummary(false)}>back to Decks</button>
                     </div>
                 ) : (
                     <DeckOverview onDeckClick={handleDeckClick} stats={stats}/>

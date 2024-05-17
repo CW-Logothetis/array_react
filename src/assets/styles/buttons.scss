@@ -44,6 +44,8 @@ a {
   border: solid 1px transparent;
   border-radius: 2px;
   text-decoration: none;
+  cursor: pointer;
+  background-color: transparent;
 
   // remove the outline set on a:hover. Buttons have padding, so using a border instead of outline is fine.
   // and outline just used for focus-visible

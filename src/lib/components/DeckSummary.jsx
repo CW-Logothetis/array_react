@@ -25,7 +25,7 @@ function DeckSummary({ stats }) {
             <p>New: {stats.new}</p>
             <p>Learning: {stats.learning}</p>
             <p>To Review: {stats.toReview}</p>
-            <button className="c: button" onClick={handleStudyClick}>Study</button>
+            <button className="c: button solid" onClick={handleStudyClick}>Study</button>
         </div>
     );
 }
