@@ -125,7 +125,7 @@ function StudyFlashcard() {
     // TODO: going to trust OpenAI to be serving safe HTML, but could add DOMPurify
     return (
         <div>
-            <div className="cont stack">
+            <div className="stack" style={{marginInline: 'auto', maxWidth: '50vw'}}>
                 <div></div>
 
                 <section className="stack">
@@ -169,7 +169,7 @@ function StudyFlashcard() {
                             question={exercises && exercises.challenging_exercise.exercise}
                             fakeData={exercises && exercises.challenging_exercise.fake_data}
                             labelId="challenging"
-                            labelText="Challenging Exercise"
+                            labelText="Second Exercise"
                             showAnswers={showAnswers}
                             answer={exercises && exercises.challenging_exercise.explanation}
                             consoleLog={exercises && exercises.challenging_exercise.console}
@@ -179,11 +179,11 @@ function StudyFlashcard() {
                     <div>
                         {!showAnswers && (<button onClick={handleSubmit}>Show Answers</button>)}
                         {showAnswers && (
-                            <div>
-                                <button onClick={() => handleScore(cardId, 'Again')}>Again</button>
-                                <button onClick={() => handleScore(cardId, 'Hard')}>Hard</button>
-                                <button onClick={() => handleScore(cardId, 'Good')}>Good</button>
-                                <button onClick={() => handleScore(cardId, 'Easy')}>Easy</button>
+                            <div className='e: score-buttons'>
+                                <button className={"c: button solid"} onClick={() => handleScore(cardId, 'Again')}>Again</button>
+                                <button className={"c: button solid"} onClick={() => handleScore(cardId, 'Hard')}>Hard</button>
+                                <button className={"c: button solid"} onClick={() => handleScore(cardId, 'Good')}>Good</button>
+                                <button className={"c: button solid"} onClick={() => handleScore(cardId, 'Easy')}>Easy</button>
                             </div>
                         )}
                     </div>
