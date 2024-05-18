@@ -1,6 +1,8 @@
 # MethodMinder MVP: flashcards with an LLM
 
-Note: this is an MVP app to prototype my idea for a flashcard app with an LLM 'tutor' for revising JavaScript and React. It is currently client-side only, which means the API key isn't secure if deployed. Currently, it uses React Router. Once it's tested I plan to move it to Next.js and use Vercel's AI SDK for a backend, SSR and LLM components. 
+Note: this is an MVP app to prototype my idea for a flashcard app with an LLM 'tutor' for revising JavaScript and React. 
+      It is client-side only and my OpenAI API key wouldn't be secure, so the Vercel deployment does not have the key in an env variable and the app won't connect to OpenAI. 
+      Currently, the MVP uses React Router. I'm migrating it to Next.js for a backend, SSR and Vercel's AI SDK for LLM components. With Supabase for easy storage and auth. 
 
 ## Introduction
 In these days of copy/paste and LLMs, it's easy to forget methods. And I wonder what it's like for beginners who must be tempted just to pseudocode with chatGPT. Maybe that's how things'll end up, with engineers spending much more time on design decisions [https://spectrum.ieee.org/ai-code-generator]. 
