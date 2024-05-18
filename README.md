@@ -69,17 +69,17 @@ React in this project works in Vite with HMR and some ESLint rules. It uses [@vi
 ``` 
 public
 src
-├── App.jsx
 ├── assets
 │   ├── images
 │   └── styles // global styles
-├── index.css
 ├── lib
 │   ├── components // UI components plus Layout from React Router
 │   └── mvpStorage // JS files acting as 'database'
-├── main.jsx
 ├── pages // sub-folders for each page, with a jsx and css file
-└── utils
+├── utils
+├──App.jsx
+├──index.css
+└──main.jsx
 ```
 
 ## Contributing
