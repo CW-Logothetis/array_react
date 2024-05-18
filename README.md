@@ -6,6 +6,7 @@ Note: this is an MVP app to prototype my idea for a flashcard app with an LLM 't
 
 ## Introduction
 In these days of copy/paste and LLMs, it's easy to forget methods. And I wonder what it's like for beginners who must be tempted just to pseudocode with chatGPT. Maybe that's how things'll end up, with engineers spending much more time on design decisions [https://spectrum.ieee.org/ai-code-generator]. 
+
 Still, we're not there yet, and I'd like a way to revise individual methods themselves when I've a few spare minutes, when I don't have time for CodeWards or Leetcode.
 So this is designed to help users learn and memorise JavaScript array methods using a pared down version of Anki's early spaced repetition system. 
 The app uses OpenAI to generate content for each array method and allows users to score their recall, which then determines the intervals in the review schedule.
