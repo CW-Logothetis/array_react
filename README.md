@@ -66,6 +66,7 @@ React in this project works in Vite with HMR and some ESLint rules. It uses [@vi
 
 ## Project Structure
  
+```
 public
 src
 ├── App.jsx
@@ -79,6 +80,7 @@ src
 ├── main.jsx
 ├── pages // sub-folders for each page, with a jsx and css file
 └── utils
+```
 
 ## Contributing
 
