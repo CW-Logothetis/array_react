@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { arrayMethods } from '../../lib/mvpStorage/arrayMethods.js';
+import { arrayGroups } from '../../lib/mvpStorage/arrayMethods.js';
 import { initializeArrayCards } from '../../lib/mvpStorage/localStorageCards.js';
 import './ArrayPage.css';
 import diagramArray from '../../assets/images/diagram_array.png';
@@ -30,21 +30,27 @@ function ArrayPage() {
             </header>
 
             <section className="cards">
-                {arrayMethods.map((arrayMethod) => (
-                    <div
-                        key={arrayMethod.id}
-                        role="button"
-                        tabIndex={0}
-                        onClick={() => handleCardClick(arrayMethod)}
-                        onKeyDown={(e) => {
-                            if (e.key === 'Enter' || e.key === ' ') {
-                                handleCardClick(arrayMethod);
-                            }
-                        }}
-                        className="card flex-col"
-                    >
-                        <h2>{arrayMethod.method}</h2>
-                        <p>{arrayMethod.description}</p>
+                {arrayGroups.map((category) => (
+                    <div key={category.category} className="category">
+                        <h2>{category.category}</h2>
+                        <p>{category.description}</p>
+                        {category.methods.map((arrayMethod) => (
+                            <div
+                                key={arrayMethod.id}
+                                role="button"
+                                tabIndex={0}
+                                onClick={() => handleCardClick(arrayMethod)}
+                                onKeyDown={(e) => {
+                                    if (e.key === 'Enter' || e.key === ' ') {
+                                        handleCardClick(arrayMethod);
+                                    }
+                                }}
+                                className="card flex-col"
+                            >
+                                <h3>{arrayMethod.method}</h3>
+                                <p>{arrayMethod.description}</p>
+                            </div>
+                        ))}
                     </div>
                 ))}
             </section>
