@@ -1,4 +1,4 @@
-export const arrayMethods = [
+export const arrayGroups = [
 
     {
 
@@ -8,15 +8,15 @@ export const arrayMethods = [
 
         methods: [
 
-            { id: 1, method: "Array.prototype.push()", description: "adds one or more elements to the end of the array" },
+            { id: 1, method: "push()", description: "adds one or more elements to the end of the array" },
 
-            { id: 2, method: "Array.prototype.pop()", description: "removes the last element from the array" },
+            { id: 2, method: "pop()", description: "removes the last element from the array" },
 
-            { id: 3, method: "Array.prototype.shift()", description: "removes the first element from the array" },
+            { id: 3, method: "shift()", description: "removes the first element from the array" },
 
-            { id: 4, method: "Array.prototype.unshift()", description: "adds one or more elements to the beginning of the array" },
+            { id: 4, method: "unshift()", description: "adds one or more elements to the beginning of the array" },
 
-            { id: 5, method: "Array.prototype.splice()", description: "adds, removes, or replaces elements in the array" },
+            { id: 5, method: "splice()", description: "adds, removes, or replaces elements in the array" },
 
         ]
 
@@ -30,9 +30,9 @@ export const arrayMethods = [
 
         methods: [
 
-            { id: 6, method: "Array.prototype.sort()", description: "sorts the elements of an array in place and returns the sorted array" },
+            { id: 6, method: "sort()", description: "sorts the elements of an array in place and returns the sorted array" },
 
-            { id: 7, method: "Array.prototype.reverse()", description: "reverses the order of the elements in the array in place" },
+            { id: 7, method: "reverse()", description: "reverses the order of the elements in the array in place" },
 
         ]
 
@@ -46,9 +46,9 @@ export const arrayMethods = [
 
         methods: [
 
-            { id: 8, method: "Array.prototype.fill()", description: "fills all the elements of an array from a start index to an end index with a static value" },
+            { id: 8, method: "fill()", description: "fills all the elements of an array from a start index to an end index with a static value" },
 
-            { id: 9, method: "Array.prototype.copyWithin()", description: "shallow copies part of an array to another location in the same array" },
+            { id: 9, method: "copyWithin()", description: "shallow copies part of an array to another location in the same array" },
 
         ]
 
@@ -62,7 +62,7 @@ export const arrayMethods = [
 
         methods: [
 
-            { id: 10, method: "Array.prototype.forEach()", description: "executes a function for each element in the array. Does not return a new array or mutate the original." },
+            { id: 10, method: "forEach()", description: "executes a function for each element in the  Does not return a new array or mutate the original." },
 
         ]
 
@@ -76,11 +76,11 @@ export const arrayMethods = [
 
         methods: [
 
-            { id: 11, method: "Array.prototype.keys()", description: "returns the array's keys" },
+            { id: 11, method: "keys()", description: "returns the array's keys" },
 
-            { id: 12, method: "Array.prototype.values()", description: "returns the array's values" },
+            { id: 12, method: "values()", description: "returns the array's values" },
 
-            { id: 13, method: "Array.prototype.entries()", description: "returns the array's key-value pairs" },
+            { id: 13, method: "entries()", description: "returns the array's key-value pairs" },
 
         ]
 
@@ -94,13 +94,13 @@ export const arrayMethods = [
 
         methods: [
 
-            { id: 14, method: "Array.prototype.includes()", description: "checks if an element is present. Returns boolean. Useful for simple presence checks." },
+            { id: 14, method: "includes()", description: "checks if an element is present. Returns boolean. Useful for simple presence checks." },
 
-            { id: 15, method: "Array.prototype.indexOf()", description: "returns the index of the first occurrence of a specified element" },
+            { id: 15, method: "indexOf()", description: "returns the index of the first occurrence of a specified element" },
 
-            { id: 16, method: "Array.prototype.lastIndexOf()", description: "returns the index of the last occurrence of a specified element" },
+            { id: 16, method: "lastIndexOf()", description: "returns the index of the last occurrence of a specified element" },
 
-            { id: 17, method: "Array.prototype.at()", description: "returns the element at a specified index, or undefined if the index is out of bounds" },
+            { id: 17, method: "at()", description: "returns the element at a specified index, or undefined if the index is out of bounds" },
 
         ]
 
@@ -114,13 +114,13 @@ export const arrayMethods = [
 
         methods: [
 
-            { id: 18, method: "Array.prototype.find()", description: "returns the first element that satisfies a condition (or undefined if no elements match)" },
+            { id: 18, method: "find()", description: "returns the first element that satisfies a condition (or undefined if no elements match)" },
 
-            { id: 19, method: "Array.prototype.findIndex()", description: "returns the index of the first element that satisfies a condition (or -1 if no elements match)" },
+            { id: 19, method: "findIndex()", description: "returns the index of the first element that satisfies a condition (or -1 if no elements match)" },
 
-            { id: 20, method: "Array.prototype.findLast()", description: "returns the last element that satisfies a condition (or undefined if no elements match)" },
+            { id: 20, method: "findLast()", description: "returns the last element that satisfies a condition (or undefined if no elements match)" },
 
-            { id: 21, method: "Array.prototype.findLastIndex()", description: "returns the index of the last element that satisfies a condition (or -1 if no elements match)" },
+            { id: 21, method: "findLastIndex()", description: "returns the index of the last element that satisfies a condition (or -1 if no elements match)" },
 
         ]
 
@@ -134,9 +134,9 @@ export const arrayMethods = [
 
         methods: [
 
-            { id: 22, method: "Array.prototype.every()", description: "checks if all elements pass a test implemented by a function" },
+            { id: 22, method: "every()", description: "checks if all elements pass a test implemented by a function" },
 
-            { id: 23, method: "Array.prototype.some()", description: "checks if at least one element passes a test implemented by a function" },
+            { id: 23, method: "some()", description: "checks if at least one element passes a test implemented by a function" },
 
         ]
 
@@ -150,17 +150,17 @@ export const arrayMethods = [
 
         methods: [
 
-            { id: 24, method: "Array.prototype.filter()", description: "creates a new array with all elements that pass a test implemented by a function" },
+            { id: 24, method: "filter()", description: "creates a new array with all elements that pass a test implemented by a function" },
 
-            { id: 25, method: "Array.prototype.map()", description: "creates a new array with the results of calling a function on every element" },
+            { id: 25, method: "map()", description: "creates a new array with the results of calling a function on every element" },
 
-            { id: 26, method: "Array.prototype.reduce()", description: "applies a function against an accumulator and each element to reduce it to a single value" },
+            { id: 26, method: "reduce()", description: "applies a function against an accumulator and each element to reduce it to a single value" },
 
-            { id: 27, method: "Array.prototype.reduceRight()", description: "applies a function against an accumulator and each element from right to left to reduce it to a single value" },
+            { id: 27, method: "reduceRight()", description: "applies a function against an accumulator and each element from right to left to reduce it to a single value" },
 
-            { id: 28, method: "Array.prototype.flatMap()", description: "maps each element using a mapping function and flattens the result into a new array" },
+            { id: 28, method: "flatMap()", description: "maps each element using a mapping function and flattens the result into a new array" },
 
-            { id: 29, method: "Array.prototype.flat()", description: "creates a new array with all sub-array elements concatenated into it recursively up to the specified depth" },
+            { id: 29, method: "flat()", description: "creates a new array with all sub-array elements concatenated into it recursively up to the specified depth" },
 
         ]
 
@@ -174,9 +174,9 @@ export const arrayMethods = [
 
         methods: [
 
-            { id: 30, method: "Array.prototype.concat()", description: "merges two or more arrays into a new array" },
+            { id: 30, method: "concat()", description: "merges two or more arrays into a new array" },
 
-            { id: 31, method: "Array.prototype.slice()", description: "returns a shallow copy of a portion of an array into a new array" },
+            { id: 31, method: "slice()", description: "returns a shallow copy of a portion of an array into a new array" },
 
         ]
 
@@ -190,11 +190,11 @@ export const arrayMethods = [
 
         methods: [
 
-            { id: 32, method: "Array.prototype.join()", description: "joins all elements of an array into a string" },
+            { id: 32, method: "join()", description: "joins all elements of an array into a string" },
 
-            { id: 33, method: "Array.prototype.toString()", description: "returns a string representing the array and its elements" },
+            { id: 33, method: "toString()", description: "returns a string representing the array and its elements" },
 
-            { id: 34, method: "Array.prototype.toLocaleString()", description: "returns a localized string representing the array and its elements" },
+            { id: 34, method: "toLocaleString()", description: "returns a localized string representing the array and its elements" },
 
         ]
 
@@ -212,7 +212,7 @@ export const arrayMethods = [
 
             { id: 36, method: "Array.isArray()", description: "checks if a value is an array" },
 
-            { id: 37, method: "Array.of()", description: "creates a new array instance with a variable number of arguments, regardless of number or type of the arguments" },
+            { id: 37, method: "Array.of()", description: "creates a new array with a variable number of arguments, regardless of number or type of arguments" },
 
         ]
 
