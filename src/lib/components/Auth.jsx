@@ -20,11 +20,16 @@ const AuthPage = () => {
      * If an error occurs, it sets the error state; otherwise, it sets a success message.
      */
     const handleSignInWithEmail = async () => {
+        console.log(import.meta.env.MODE)
+        const redirectTo = import.meta.env.MODE === 'development'
+            ? import.meta.env.VITE_DEV_REDIRECT_URL
+            : import.meta.env.VITE_PROD_REDIRECT_URL;
+
         const { error } = await supabase.auth.signInWithOtp({
             email,
             options: {
                 shouldCreateUser: true,
-                emailRedirectTo: 'http://localhost:5173'
+                emailRedirectTo: redirectTo
             },
         });
         if (error) {
@@ -56,6 +61,7 @@ const AuthPage = () => {
             setUser(session?.user ?? null);
         });
 
+        // TODO: This useEffect is duplicated here and in App. Needs refactor. Maybe a ProtectedRoute comp for App.jsx
         return () => {
             subscription?.unsubscribe();
         };
@@ -96,4 +102,5 @@ const AuthPage = () => {
 };
 
 export default AuthPage;
+
 
