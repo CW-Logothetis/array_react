@@ -24,7 +24,7 @@ const AuthPage = () => {
         const redirectTo = import.meta.env.MODE === 'development'
             ? import.meta.env.VITE_DEV_REDIRECT_URL
             : import.meta.env.VITE_PROD_REDIRECT_URL;
-
+        console.log(redirectTo)
         const { error } = await supabase.auth.signInWithOtp({
             email,
             options: {
