@@ -30,7 +30,7 @@ header a:hover {
 
 nav {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
     gap: 3rem;
 }
 
