@@ -44,16 +44,34 @@ const AuthPage = () => {
     }, [setUser]);
 
     return (
-        <div>
+        <div 
+            className='stack' 
+            style={{ display: 'flex', flexDirection: 'column', margin: '10% auto 0', width: '250px' }}
+        >
             <h2>Sign In</h2>
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter your email"
-            />
-            <button onClick={handleSignInWithEmail}>Send Magic Link</button>
-            {message && <p>{message}</p>}
+            <div>
+                <label htmlFor="email">Email for magic link:</label>
+                <input
+                    id="email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+            </div>
+         
+            <button 
+                onClick={handleSignInWithEmail} 
+                className='button solid' 
+                style={{ margin: '10% auto 0', width: '150px' }}
+            >
+                Send Magic Link
+            </button>
+            {message && 
+                <div>
+                    <p>{message}</p>
+                    <p>You can now close this tab</p>
+                </div>
+            }
             {error && <p>{error}</p>}
         </div>
     );
