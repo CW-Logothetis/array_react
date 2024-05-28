@@ -9,40 +9,55 @@ import ArrayMethodPage from './pages/method/ArrayMethodPage.jsx';
 import NotFound from "./pages/error/NotFound.jsx";
 import AuthPage from './lib/components/Auth.jsx';
 
+/**
+ * Context to provide authentication state and user information.
+ * @type {React.Context<{user: object, setUser: React.Dispatch<React.SetStateAction<object>>}>}
+ */
 export const AuthContext = createContext();
 
+/**
+ * Main application component.
+ * Manages user authentication state and routes.
+ * 
+ * @component
+ * @returns {JSX.Element} The rendered component.
+ */
 function App() {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        /**
+         *  Fetches current session when the component mounts, and sets the user state.
+         */
         const getSession = async () => {
             const { data: { session } } = await supabase.auth.getSession();
-            console.log(session)
             setUser(session?.user ?? null);
             setLoading(false);
-            console.log('User after getSession:', session?.user);
         };
 
         getSession();
 
+        /**
+         * Subscribes to authentication state changes. 
+         * When an auth event occurs (sign in,out,expire, token refresh), it updates the user state and stops the loading state.
+         */
         const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-            console.log(session)
             setUser(session?.user ?? null);
             setLoading(false);
-
-            console.log('User after onAuthStateChange:', session);
         });
 
-        return () => {
+         /**
+          * ensures the subscription to listener is unsubscribed when the component unmounts 
+          * to prevent memory leaks 
+          */
+         return () => {
             subscription?.unsubscribe();
         };
     }, []);
 
     if (loading) {
-
-        return <div>Loading...</div>; // Or a more sophisticated loading indicator
-
+        return <div>Loading...</div>;
     }
 
     return (
