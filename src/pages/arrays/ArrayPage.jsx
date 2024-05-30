@@ -4,6 +4,7 @@ import { arrayGroups } from '../../lib/mvpStorage/arrayGroups.js';
 import { initializeArrayCards } from '../../lib/mvpStorage/localStorageCards.js';
 import './ArrayPage.css';
 import diagramArray from '../../assets/images/diagram_array.png';
+import CardGroup from '../../lib/components/CardGroup';
 
 function ArrayPage() {
     let navigate = useNavigate();
@@ -31,29 +32,13 @@ function ArrayPage() {
 
             <section className="groups">
                 {arrayGroups.map((category) => (
-                    <div key={category.category} className="category">
-                        <h2>{category.category}</h2>
-                        <p>{category.description}</p>
-                        <div className="cards">
-                            {category.methods.map((arrayMethod) => (
-                                <div
-                                    key={arrayMethod.id}
-                                    role="button"
-                                    tabIndex={0}
-                                    onClick={() => handleCardClick(arrayMethod)}
-                                    onKeyDown={(e) => {
-                                        if (e.key === 'Enter' || e.key === ' ') {
-                                            handleCardClick(arrayMethod);
-                                        }
-                                    }}
-                                    className="card flex-col"
-                                >
-                                    <h3>{arrayMethod.method}</h3>
-                                    <p>{arrayMethod.description}</p>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    <CardGroup
+                        key={category.category}
+                        title={category.category}
+                        description={category.description}
+                        items={category.methods}
+                        onCardClick={handleCardClick}
+                    />
                 ))}
             </section>
         </div>
