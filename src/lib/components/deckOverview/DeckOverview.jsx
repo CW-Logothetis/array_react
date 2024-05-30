@@ -3,8 +3,8 @@ import './DeckOverview.scss';
 
 function DeckOverview({ onDeckClick, stats }) {
     return (
-        <div>
-            <table style={{ margin: 'auto', width: '70%', tableLayout: 'auto' }}>
+      
+            <table style={{ marginInline: 'auto', width: '70%', tableLayout: 'auto' }}>
                 <thead>
                 <tr>
                     <th style={{ width: 'auto' }}>Deck</th>
@@ -22,7 +22,7 @@ function DeckOverview({ onDeckClick, stats }) {
                 </tr>
                 </tbody>
             </table>
-        </div>
+       
     );
 }
 
