@@ -51,7 +51,7 @@ function HomePage() {
     };
 
     return (
-        <div className="l: stack mainContent">
+        <div className="l: stack mainContent mainContentWidth">
             {showSummary ? (
                 <div style={{marginInline: 'auto', width: '70%'}}>
                     <DeckSummary stats={stats}/>

@@ -14,7 +14,7 @@ export default function Header() {
 
     return (
         <header>
-            <div className="header-links">
+            <div className="header-links mainContentWidth">
                 <Link className="site-logo" to="/"> <img src={logo} alt="Site logo" /></Link>
                 <nav>
                     <NavLink to="/" className={({ isActive }) => isActive ? "active-link" : null}>Study</NavLink>
