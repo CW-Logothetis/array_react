@@ -20,6 +20,7 @@ If I ever have the time, my plan is to add objects, strings, syntax, React Hooks
 - [Installation](#installation)
 - [Usage](#usage)
 - [Project Structure](#project-structure)
+- [Supabase](#supabase)
 - [Contributing](#contributing)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
@@ -119,6 +120,11 @@ src
 .env // only local - gitignore
 README, LICENCE, package.json, vite.config.js
 ```
+
+## Supabase
+- authentication is with magic link
+- decks and cards tabls have Row Level Security with SELECT policy to enable select for authenticated users only
+
 
 ## Contributing
 
