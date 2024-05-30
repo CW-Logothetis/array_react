@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import DeckOverview from "../../lib/components/deckOverview/DeckOverview.jsx";
 import DeckSummary from "../../lib/components/DeckSummary.jsx";
 import './HomePage.css';
@@ -6,6 +7,7 @@ import './HomePage.css';
 function HomePage() {
     const [showSummary, setShowSummary] = useState(false);
     const [stats, setStats] = useState({new: 0, learning: 0, toReview: 0});
+    const navigate = useNavigate();
 
     useEffect(() => {
         calculateStats();
@@ -44,15 +46,22 @@ function HomePage() {
         setShowSummary(true);
     }
 
+    const handleAddDeckClick = () => {
+        navigate('/decks');
+    };
+
     return (
-        <div className="" style={{marginBlockStart: '2rem', marginInline: 'auto', width: '50%'}}>
+        <div className="l: stack mainContent">
             {showSummary ? (
                 <div style={{marginInline: 'auto', width: '70%'}}>
                     <DeckSummary stats={stats}/>
                     <button className="c: button outline" style={{marginBlockEnd: '1.5rem'}} onClick={() => setShowSummary(false)}>back to Decks</button>
                 </div>
             ) : (
-                <DeckOverview onDeckClick={handleDeckClick} stats={stats}/>
+                <div>
+                    <button className='button solid' onClick={handleAddDeckClick}>+ &nbsp; Add deck</button>
+                    <DeckOverview onDeckClick={handleDeckClick} stats={stats}/>
+                </div>
             )}
         </div>
     );
