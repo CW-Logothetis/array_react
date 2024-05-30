@@ -4,7 +4,7 @@ import { arrayGroups } from '../../lib/mvpStorage/arrayGroups.js';
 import { initializeArrayCards } from '../../lib/mvpStorage/localStorageCards.js';
 import './ArrayPage.css';
 import diagramArray from '../../assets/images/diagram_array.png';
-import CardGroup from '../../lib/components/CardGroup';
+import CardGroup from '../../lib/components/cardGroup/CardGroup.jsx';
 
 function ArrayPage() {
     let navigate = useNavigate();
