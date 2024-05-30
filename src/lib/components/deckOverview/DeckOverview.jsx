@@ -4,7 +4,7 @@ import './DeckOverview.scss';
 function DeckOverview({ onDeckClick, stats }) {
     return (
       
-            <table style={{ marginInline: 'auto', width: '70%', tableLayout: 'auto' }}>
+            <table style={{ marginInline: 'auto', width: '100%', maxWidth: '50ch', tableLayout: 'auto' }}>
                 <thead>
                 <tr>
                     <th style={{ width: 'auto' }}>Deck</th>

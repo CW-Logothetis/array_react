@@ -28,7 +28,7 @@ function Decks() {
     }, []);
 
     return (
-        <div className="l: mainContent">
+        <div className='mainContent mainContentWidth'>
             <h1>Decks</h1>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
                 {decks && decks.length > 0 ? (
