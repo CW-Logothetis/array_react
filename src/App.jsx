@@ -3,6 +3,7 @@ import { supabase } from './services/supabaseClient';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './lib/components/layout/Layout.jsx';
 import HomePage from './pages/home/HomePage.jsx';
+import Decks from './pages/decks/Decks.jsx';
 import StudyFlashcard from './pages/studyFlashcard/StudyFlashcard.jsx';
 import ArrayPage from './pages/arrays/ArrayPage.jsx';
 import ArrayMethodPage from './pages/method/ArrayMethodPage.jsx';
@@ -65,6 +66,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route path="/" element={user ? <HomePage /> : <Navigate to="/auth" />} />
+                    <Route path="/decks" element={user ? <Decks /> : <Navigate to="/auth" />} />
                     <Route path="/study" element={user ? <StudyFlashcard /> : <Navigate to="/auth" />} />
                     <Route path="/arrays" element={user ? <ArrayPage /> : <Navigate to="/auth" />} />
                     <Route path="/arrays/:array_method" element={user ? <ArrayMethodPage /> : <Navigate to="/auth" />} />
