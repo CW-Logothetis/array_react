@@ -3,7 +3,7 @@ import './DeckOverview.scss';
 
 
 
-function DeckOverview({ onDeckClick, userDecks }) {
+function DeckOverview({ onDeckClick, stats, userDecks }) {
     return (
         <div>
             {userDecks && userDecks.length > 0 ? (
@@ -20,9 +20,9 @@ function DeckOverview({ onDeckClick, userDecks }) {
                         {userDecks.map(userDeck => (
                             <tr key={userDeck.deck_id} onClick={() => onDeckClick(userDeck)} className="deck-name" style={{ cursor: 'pointer' }}>
                                 <td>{userDeck.all_decks.deck_name}</td>
-                                {/* <td>{deck.stats.new}</td>
-                                <td>{deck.stats.learning}</td>
-                                <td>{deck.stats.due}</td> */}
+                                <td>{stats.new}</td>
+                                <td>{stats.learning}</td>
+                                <td>{stats.due}</td>
                             </tr>
                         ))}
                     </tbody>

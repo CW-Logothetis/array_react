@@ -7,56 +7,59 @@ import './HomePage.css';
 
 function HomePage() {
     const [showSummary, setShowSummary] = useState(false);
-    const [stats, setStats] = useState({new: 0, learning: 0, toReview: 0});
+    const [stats, setStats] = useState({new: 0, learning: 0, toReview: 0, due: 0});
     const [userDecks, setUserDecks] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
     useEffect(() => {
-        calculateStats();
-        fetchDecks();
+        fetchDecksAndFlashcards();
     }, []);
 
-    const fetchDecks = async () => {
+    const fetchDecksAndFlashcards = async () => {
         try {
-              // Get the current user's session
             const { data: { user } } = await supabase.auth.getUser();
 
-            const { data, error } = await supabase
+            const { data: decks, error: decksError } = await supabase
                 .from('user_decks')
-                // select all cols from user_decks, plus deck_name col from all_decks
-                .select('*, all_decks(deck_name)') 
-                // `eq` (equals operator) matches two args, so only includes decks that belong to user
+                .select('*, all_decks(deck_name)')
                 .eq('user_id', user.id);
-            if (error) {
-                console.error('supabase error fetching decks', error);
-            } else {
-                setUserDecks(data);
-            }
+
+            if (decksError) throw decksError;
+
+            setUserDecks(decks);
+
+            const deckIds = decks.map(deck => deck.deck_id);
+            const { data: flashcards, error: flashcardsError } = await supabase
+                .from('user_flashcards')
+                .select('*')
+                .in('deck_id', deckIds); // `in()` requires an array of values to match against
+
+            if (flashcardsError) throw flashcardsError;
+
+            calculateStats(flashcards);
         } catch (err) {
             console.error('Unexpected error:', err);
+        } finally {
+            setIsLoading(false); // Set loading to false after fetch is complete
         }
     };
 
-    const calculateStats = () => {
-        const cards = JSON.parse(localStorage.getItem('cards') || '[]');
+    const calculateStats = (flashcards) => {
+        console.log(flashcards)
         const today = new Date().toISOString().split('T')[0];
         let newCount = 0;
         let learningCount = 0;
-        let dueCount = 0;
         let toReviewCount = 0;
+        let dueCount = 0;
 
-        cards.forEach(card => {
-            if (!card.lastReviewed) {
+        flashcards.forEach(card => {
+            if (!card.last_reviewed) {
                 newCount++;
             } else {
-                // If the card has been reviewed before, increment the count of cards in the learning phase
                 learningCount++;
-
-                // Check if the card is due for review today
-                if (card.nextDue.split('T')[0] <= today) {
+                if (card.next_due.split('T')[0] <= today) {
                     dueCount++;
-
-                    // Check if the card is past the initial learning phase (set as interval > 1)
                     if (card.interval > 1) {
                         toReviewCount++;
                     }
@@ -64,8 +67,10 @@ function HomePage() {
             }
         });
 
-        setStats({new: newCount, learning: learningCount, due: dueCount, toReview: toReviewCount});
+        setStats({ new: newCount, learning: learningCount, toReview: toReviewCount, due: dueCount });
+        console.log(stats)
     };
+
     const handleDeckClick = () => {
         setShowSummary(true);
     }
@@ -76,15 +81,17 @@ function HomePage() {
 
     return (
         <div className="l: stack mainContent mainContentWidth">
-            {showSummary ? (
-                <div style={{marginInline: 'auto', width: '70%'}}>
-                    <DeckSummary stats={stats}/>
-                    <button className="c: button outline" style={{marginBlockEnd: '1.5rem'}} onClick={() => setShowSummary(false)}>back to Decks</button>
+            {isLoading ? (
+                <div>Loading...</div> 
+            ) : showSummary ? (
+                <div style={{ marginInline: 'auto', width: '70%' }}>
+                    <DeckSummary stats={stats} />
+                    <button className="c: button outline" style={{ marginBlockEnd: '1.5rem' }} onClick={() => setShowSummary(false)}>back to Decks</button>
                 </div>
             ) : (
                 <div>
                     <button className='button solid' onClick={handleAddDeckClick}>+ &nbsp; Add deck</button>
-                    <DeckOverview onDeckClick={handleDeckClick} userDecks={userDecks} stats={stats}/>
+                    <DeckOverview onDeckClick={handleDeckClick} userDecks={userDecks} stats={stats} />
                 </div>
             )}
         </div>
