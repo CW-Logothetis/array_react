@@ -1,15 +1,41 @@
 import React, {useEffect, useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import DeckOverview from "../../lib/components/deckOverview/DeckOverview.jsx";
 import DeckSummary from "../../lib/components/DeckSummary.jsx";
+import { supabase } from '../../services/supabaseClient.js';
 import './HomePage.css';
 
 function HomePage() {
     const [showSummary, setShowSummary] = useState(false);
     const [stats, setStats] = useState({new: 0, learning: 0, toReview: 0});
+    const [userDecks, setUserDecks] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         calculateStats();
+        fetchDecks();
     }, []);
+
+    const fetchDecks = async () => {
+        try {
+              // Get the current user's session
+            const { data: { user } } = await supabase.auth.getUser();
+
+            const { data, error } = await supabase
+                .from('user_decks')
+                // select all cols from user_decks, plus deck_name col from all_decks
+                .select('*, all_decks(deck_name)') 
+                // `eq` (equals operator) matches two args, so only includes decks that belong to user
+                .eq('user_id', user.id);
+            if (error) {
+                console.error('supabase error fetching decks', error);
+            } else {
+                setUserDecks(data);
+            }
+        } catch (err) {
+            console.error('Unexpected error:', err);
+        }
+    };
 
     const calculateStats = () => {
         const cards = JSON.parse(localStorage.getItem('cards') || '[]');
@@ -44,18 +70,23 @@ function HomePage() {
         setShowSummary(true);
     }
 
+    const handleAddDeckClick = () => {
+        navigate('/decks');
+    };
+
     return (
-        <div >
-            <div className="stack" style={{margin: 'auto', width: '50%'}}>
-                {showSummary ? (
-                    <div style={{margin: 'auto', width: '70%'}}>
-                        <DeckSummary stats={stats}/>
-                        <button className="c: button outline" style={{marginBlockEnd: '1.5rem'}} onClick={() => setShowSummary(false)}>back to Decks</button>
-                    </div>
-                ) : (
-                    <DeckOverview onDeckClick={handleDeckClick} stats={stats}/>
-                )}
-            </div>
+        <div className="l: stack mainContent mainContentWidth">
+            {showSummary ? (
+                <div style={{marginInline: 'auto', width: '70%'}}>
+                    <DeckSummary stats={stats}/>
+                    <button className="c: button outline" style={{marginBlockEnd: '1.5rem'}} onClick={() => setShowSummary(false)}>back to Decks</button>
+                </div>
+            ) : (
+                <div>
+                    <button className='button solid' onClick={handleAddDeckClick}>+ &nbsp; Add deck</button>
+                    <DeckOverview onDeckClick={handleDeckClick} userDecks={userDecks} stats={stats}/>
+                </div>
+            )}
         </div>
     );
 }

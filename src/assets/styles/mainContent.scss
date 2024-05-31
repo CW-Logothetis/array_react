@@ -1,0 +1,9 @@
+.mainContent {
+    margin-block-start: 2rem;
+    margin-inline: auto;
+}
+
+.mainContentWidth {
+    width: clamp(300px, 50%, 120ch);
+}
+

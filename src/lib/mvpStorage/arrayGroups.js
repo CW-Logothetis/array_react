@@ -162,6 +162,8 @@ export const arrayGroups = [
 
             { id: 29, method: "flat()", description: "creates a new array with all sub-array elements concatenated into it recursively up to the specified depth" },
 
+            { id: 30, method: "with()", description: "creates a new array with the element at a given index replaced with a given value." },
+
         ]
 
     },
@@ -174,9 +176,9 @@ export const arrayGroups = [
 
         methods: [
 
-            { id: 30, method: "concat()", description: "merges two or more arrays into a new array" },
+            { id: 31, method: "concat()", description: "merges two or more arrays into a new array" },
 
-            { id: 31, method: "slice()", description: "returns a shallow copy of a portion of an array into a new array" },
+            { id: 32, method: "slice()", description: "returns a shallow copy of a portion of an array into a new array" },
 
         ]
 
@@ -190,11 +192,11 @@ export const arrayGroups = [
 
         methods: [
 
-            { id: 32, method: "join()", description: "joins all elements of an array into a string" },
+            { id: 33, method: "join()", description: "joins all elements of an array into a string" },
 
-            { id: 33, method: "toString()", description: "returns a string representing the array and its elements" },
+            { id: 34, method: "toString()", description: "returns a string representing the array and its elements" },
 
-            { id: 34, method: "toLocaleString()", description: "returns a localized string representing the array and its elements" },
+            { id: 35, method: "toLocaleString()", description: "returns a localized string representing the array and its elements" },
 
         ]
 
@@ -208,11 +210,13 @@ export const arrayGroups = [
 
         methods: [
 
-            { id: 35, method: "Array.from()", description: "creates a new array instance from an array-like or iterable object" },
+            { id: 36, method: "Array.from()", description: "creates a new array instance from an array-like or iterable object" },
 
-            { id: 36, method: "Array.isArray()", description: "checks if a value is an array" },
+            { id: 37, method: "Array.fromAsync()", description: "creates a new array instance from an async iterable, iterable, or array-like object" },
 
-            { id: 37, method: "Array.of()", description: "creates a new array with a variable number of arguments, regardless of number or type of arguments" },
+            { id: 38, method: "Array.isArray()", description: "checks if a value is an array" },
+
+            { id: 39, method: "Array.of()", description: "creates a new array with a variable number of arguments, regardless of number or type of arguments" },
 
         ]
 
