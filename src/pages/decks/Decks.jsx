@@ -68,9 +68,9 @@ function Decks() {
             // Navigate back to HomePage
             navigate('/');
         } catch (error) {
-          console.error('Error handling card click:', error);
+            console.error('Error handling card click:', error);
         }
-      };
+    };
 
     return (
         <div className='mainContent mainContentWidth'>
