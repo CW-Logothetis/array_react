@@ -1,10 +1,12 @@
 import React from 'react';
 import './DeckOverview.scss';
 
-function DeckOverview({ onDeckClick, decks }) {
+
+
+function DeckOverview({ onDeckClick, userDecks }) {
     return (
         <div>
-            {decks && decks.length > 0 ? (
+            {userDecks && userDecks.length > 0 ? (
                 <table style={{ marginInline: 'auto', width: '100%', maxWidth: '50ch', tableLayout: 'auto' }}>
                     <thead>
                         <tr>
@@ -15,12 +17,12 @@ function DeckOverview({ onDeckClick, decks }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {decks.map(deck => (
-                            <tr key={deck.id} onClick={() => onDeckClick(deck)} className="deck-name" style={{ cursor: 'pointer' }}>
-                                <td>{deck.deck_name}</td>
-                                <td>{deck.stats.new}</td>
+                        {userDecks.map(userDeck => (
+                            <tr key={userDeck.deck_id} onClick={() => onDeckClick(userDeck)} className="deck-name" style={{ cursor: 'pointer' }}>
+                                <td>{userDeck.all_decks.deck_name}</td>
+                                {/* <td>{deck.stats.new}</td>
                                 <td>{deck.stats.learning}</td>
-                                <td>{deck.stats.due}</td>
+                                <td>{deck.stats.due}</td> */}
                             </tr>
                         ))}
                     </tbody>
