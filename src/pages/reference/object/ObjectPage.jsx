@@ -6,8 +6,8 @@ import './ObjectPage.css';
 function ObjectPage() {
     let navigate = useNavigate();
 
-    const handleCardClick = (objectMethod) => {
-        navigate(`/reference/object/${objectMethod.name}`);
+    const handleCardClick = (method) => {
+        navigate(`/reference/object/${method.name}`);
     };
 
     return (
@@ -27,21 +27,21 @@ function ObjectPage() {
                         <h2>{category.category}</h2>
                         <p>{category.description}</p>
                         <div className="cards">
-                            {category.methods.map((objectMethod) => (
+                            {category.methods.map((method) => (
                                 <div
-                                    key={objectMethod.id}
+                                    key={method.id}
                                     role="button"
                                     tabIndex={0}
-                                    onClick={() => handleCardClick(objectMethod)}
+                                    onClick={() => handleCardClick(method)}
                                     onKeyDown={(e) => {
                                         if (e.key === 'Enter' || e.key === ' ') {
-                                            handleCardClick(objectMethod);
+                                            handleCardClick(method);
                                         }
                                     }}
                                     className="card flex-col"
                                 >
-                                    <h3>{objectMethod.method}</h3>
-                                    <p>{objectMethod.description}</p>
+                                    <h3>{method.method}</h3>
+                                    <p>{method.description}</p>
                                 </div>
                             ))}
                         </div>

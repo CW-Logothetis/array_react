@@ -7,8 +7,8 @@ import diagramArray from '../../../assets/images/diagram_array.png';
 function ArrayPage() {
     let navigate = useNavigate();
 
-    const handleCardClick = (arrayMethod) => {
-        navigate(`/reference/array/${arrayMethod.name}`);
+    const handleCardClick = (method) => {
+        navigate(`/reference/array/${method.name}`);
     };
 
     return (
@@ -29,21 +29,21 @@ function ArrayPage() {
                         <h2>{category.category}</h2>
                         <p>{category.description}</p>
                         <div className="cards">
-                            {category.methods.map((arrayMethod) => (
+                            {category.methods.map((method) => (
                                 <div
-                                    key={arrayMethod.id}
+                                    key={method.id}
                                     role="button"
                                     tabIndex={0}
-                                    onClick={() => handleCardClick(arrayMethod)}
+                                    onClick={() => handleCardClick(method)}
                                     onKeyDown={(e) => {
                                         if (e.key === 'Enter' || e.key === ' ') {
-                                            handleCardClick(arrayMethod);
+                                            handleCardClick(method);
                                         }
                                     }}
                                     className="card flex-col"
                                 >
-                                    <h3>{arrayMethod.method}</h3>
-                                    <p>{arrayMethod.description}</p>
+                                    <h3>{method.method}</h3>
+                                    <p>{method.description}</p>
                                 </div>
                             ))}
                         </div>
