@@ -1,20 +1,14 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { arrayGroups } from '../../lib/mvpStorage/arrayGroups.js';
-import { initializeArrayCards } from '../../lib/mvpStorage/localStorageCards.js';
+import { arrayGroups } from '../../../lib/mvpStorage/arrayGroups.js';
 import './ArrayPage.css';
-import diagramArray from '../../assets/images/diagram_array.png';
+import diagramArray from '../../../assets/images/diagram_array.png';
 
 function ArrayPage() {
     let navigate = useNavigate();
 
-    useEffect(() => {
-        //adds 37 array methods to local storage
-        initializeArrayCards();
-    }, []);
-
     const handleCardClick = (arrayMethod) => {
-        navigate(`/arrays/${arrayMethod.id}`);
+        navigate(`/array/${arrayMethod.id}`);
     };
 
     return (

@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import OpenAI from 'openai';
-import {styleHeadings} from '../../utils/styleHeadings.js';
-import {arrayMethods} from "../../lib/mvpStorage/arrayMethods.js";
+import {styleHeadings} from '../../../utils/styleHeadings.js';
+import {arrayMethods} from "../../../lib/mvpStorage/arrayMethods.js";
 import {NavLink} from 'react-router-dom';
 import './ArrayMethodPage.css';
 
@@ -45,7 +45,7 @@ const renderList = (array) => (
     <ul>
         {array.map(method => (
             <li key={method.id}>
-                <NavLink to={`/arrays/${method.id}`} className="button text-only">
+                <NavLink to={`/array/${method.id}`} className="button text-only">
                     {method.method}
                 </NavLink>
             </li>

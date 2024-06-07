@@ -18,7 +18,7 @@ export default function Header() {
                 <Link className="site-logo" to="/"> <img src={logo} alt="Site logo" /></Link>
                 <nav>
                     <NavLink to="/" className={({ isActive }) => isActive ? "active-link" : null}>Study</NavLink>
-                    <NavLink to="/arrays" className={({ isActive }) => isActive ? "active-link" : null}>Arrays</NavLink>
+                    <NavLink to="/reference" className={({ isActive }) => isActive ? "active-link" : null}>Reference</NavLink>
                     {user ? (
                         <button onClick={handleSignOut} className='button text-only'>Sign Out</button>
                     ) : (
