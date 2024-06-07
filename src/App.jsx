@@ -5,8 +5,7 @@ import Layout from './lib/components/layout/Layout.jsx';
 import HomePage from './pages/home/HomePage.jsx';
 import StudyFlashcard from './pages/studyFlashcard/StudyFlashcard.jsx';
 import ReferencePage from './pages/reference/ReferencePage.jsx'
-import ArrayPage from './pages/reference/array/ArrayPage.jsx';
-import ObjectPage from './pages/reference/object/ObjectPage.jsx';
+import MethodTypePage from './pages/reference/methodType/MethodTypePage.jsx';
 import MethodPage from './pages/reference/method/MethodPage.jsx';
 import NotFound from "./pages/error/NotFound.jsx";
 import AuthPage from './lib/components/Auth.jsx';
@@ -69,8 +68,7 @@ function App() {
                     <Route path="/" element={user ? <HomePage /> : <Navigate to="/auth" />} />
                     <Route path="study" element={user ? <StudyFlashcard /> : <Navigate to="/auth" />} />
                     <Route path="/reference" element={user ? <ReferencePage /> : <Navigate to="/auth" />} />
-                    <Route path="/reference/array" element={user ? <ArrayPage /> : <Navigate to="/auth" />} />
-                    <Route path="/reference/object" element={user ? <ObjectPage /> : <Navigate to="/auth" />} />
+                    <Route path="/reference/:method_type" element={user ? <MethodTypePage /> : <Navigate to="/auth" />} />
                     <Route path="/reference/:method_type/:method_name" element={user ? <MethodPage /> : <Navigate to="/auth" />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>

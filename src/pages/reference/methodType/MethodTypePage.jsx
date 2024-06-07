@@ -1,14 +1,29 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { arrayGroups } from '../../../lib/mvpStorage/arrayGroups.js';
-import './ArrayPage.css';
-import diagramArray from '../../../assets/images/diagram_array.png';
+import { useNavigate, useParams } from 'react-router-dom';
+import './MethodTypePage.css';
 
-function ArrayPage() {
+const methodGroupsMap = {
+    array: () => import('../../../lib/mvpStorage/arrayGroups.js'),
+    object: () => import('../../../lib/mvpStorage/objectGroups.js'),
+    string: () => import('../../../lib/mvpStorage/stringGroups.js'),
+};
+
+function MethodTypePage() {
+    const { method_type } = useParams();
+    const [methodGroups, setMethodGroups] = React.useState([]);
     let navigate = useNavigate();
 
+    React.useEffect(() => {
+        const loadMethodGroups = async () => {
+            const module = await methodGroupsMap[method_type]();
+            const groups = module[method_type + 'Groups'];
+            setMethodGroups(groups);
+        };
+        loadMethodGroups();
+    }, [method_type]);
+
     const handleCardClick = (method) => {
-        navigate(`/reference/array/${method.name}`);
+        navigate(`/reference/${method_type}/${method.name}`);
     };
 
     return (
@@ -16,15 +31,13 @@ function ArrayPage() {
             <header>
                 <div className="header__content">
                     <div className="header__text">
-                        <h1>Array methods</h1>
+                        <h1>{method_type.charAt(0).toUpperCase() + method_type.slice(1)} methods</h1>
                         <p>Summaries, syntax and example</p>
                     </div>
-                    <img src={diagramArray} alt='diagram of an array' width="450" height="80" />
                 </div>
             </header>
-
             <section className="groups">
-                {arrayGroups.map((category) => (
+                {methodGroups.map((category) => (
                     <div key={category.category} className="category">
                         <h2>{category.category}</h2>
                         <p>{category.description}</p>
@@ -54,4 +67,4 @@ function ArrayPage() {
     );
 }
 
-export default ArrayPage;
+export default MethodTypePage;
