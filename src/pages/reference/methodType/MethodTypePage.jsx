@@ -4,6 +4,7 @@ import './MethodTypePage.css';
 
 const methodGroupsMap = {
     array: () => import('../../../lib/mvpStorage/arrayGroups.js'),
+    number: () => import('../../../lib/mvpStorage/numberGroups.js'),
     object: () => import('../../../lib/mvpStorage/objectGroups.js'),
     string: () => import('../../../lib/mvpStorage/stringGroups.js'),
 };
