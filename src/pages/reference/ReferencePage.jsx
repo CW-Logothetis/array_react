@@ -15,7 +15,9 @@ function ReferencePage() {
                 <li className="card" onClick={() => handleCardClick('object')}>Object</li>
                 <li className="card" onClick={() => handleCardClick('array')}>Array</li>
                 <li className="card" onClick={() => handleCardClick('string')}>String</li>
-                <li className="card" onClick={() => handleCardClick('string')}>Number</li>
+                <li className="card" onClick={() => handleCardClick('number')}>Number</li>
+                <li className="card" onClick={() => handleCardClick('map')}>Map</li>
+                <li className="card" onClick={() => handleCardClick('set')}>Set</li>
             </ul>
         </div>
     )
