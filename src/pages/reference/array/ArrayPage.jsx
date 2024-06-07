@@ -8,7 +8,7 @@ function ArrayPage() {
     let navigate = useNavigate();
 
     const handleCardClick = (arrayMethod) => {
-        navigate(`/array/${arrayMethod.id}`);
+        navigate(`/reference/array/${arrayMethod.name}`);
     };
 
     return (
