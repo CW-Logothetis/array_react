@@ -4,8 +4,9 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import Layout from './lib/components/layout/Layout.jsx';
 import HomePage from './pages/home/HomePage.jsx';
 import StudyFlashcard from './pages/studyFlashcard/StudyFlashcard.jsx';
-import ArrayPage from './pages/arrays/ArrayPage.jsx';
-import ArrayMethodPage from './pages/method/ArrayMethodPage.jsx';
+import ReferencePage from './pages/reference/ReferencePage.jsx'
+import MethodTypePage from './pages/reference/methodType/MethodTypePage.jsx';
+import MethodPage from './pages/reference/method/MethodPage.jsx';
 import NotFound from "./pages/error/NotFound.jsx";
 import AuthPage from './lib/components/Auth.jsx';
 
@@ -65,9 +66,10 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route path="/" element={user ? <HomePage /> : <Navigate to="/auth" />} />
-                    <Route path="/study" element={user ? <StudyFlashcard /> : <Navigate to="/auth" />} />
-                    <Route path="/arrays" element={user ? <ArrayPage /> : <Navigate to="/auth" />} />
-                    <Route path="/arrays/:array_method" element={user ? <ArrayMethodPage /> : <Navigate to="/auth" />} />
+                    <Route path="study" element={user ? <StudyFlashcard /> : <Navigate to="/auth" />} />
+                    <Route path="/reference" element={user ? <ReferencePage /> : <Navigate to="/auth" />} />
+                    <Route path="/reference/:method_type" element={user ? <MethodTypePage /> : <Navigate to="/auth" />} />
+                    <Route path="/reference/:method_type/:method_name" element={user ? <MethodPage /> : <Navigate to="/auth" />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>
                 <Route path="/auth" element={<AuthPage />} />
