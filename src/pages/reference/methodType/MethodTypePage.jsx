@@ -58,7 +58,9 @@ function MethodTypePage() {
                                     }}
                                     className="card flex-col"
                                 >
-                                    <h3>{method.method}</h3>
+                                    <h3 className={method.core === false ? 'not-core' : ''}>
+                                        {method.method}
+                                    </h3>
                                     <p>{method.description}</p>
                                 </div>
                             ))}

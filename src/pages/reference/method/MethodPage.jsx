@@ -12,7 +12,7 @@ function MethodPage({ methodType, methodGroups }) {
         dangerouslyAllowBrowser: true
     })
 
-    const { method_name } = useParams();
+    const { method_type, method_name } = useParams();
 
     const [output, setOutput] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -31,7 +31,7 @@ function MethodPage({ methodType, methodGroups }) {
                 You are an experienced teacher of JavaScript and a senior front end developer.
                 You specialise in explaining JavaScript to beginners in layman terms, with real world examples.
                 Create four paragraphs, with the headings for each section. 
-                First, under the EXPLANATION heading, explain the ${methodType} method of "${method_name}()". 
+                First, under the EXPLANATION heading, explain the "${method_name}() for JavaScript's ${method_type} type.". 
                 Then, under the SYNTAX heading, provide the syntax. 
                 Next, under the EXAMPLES heading, give a simple example and a more difficult real-world example.
                 Thanks very much.`;
