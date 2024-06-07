@@ -45,7 +45,7 @@ const renderList = (array) => (
     <ul>
         {array.map(method => (
             <li key={method.id}>
-                <NavLink to={`/array/${method.id}`} className="button text-only">
+                <NavLink to={`/reference/array/${method.id}`} className="button text-only">
                     {method.method}
                 </NavLink>
             </li>

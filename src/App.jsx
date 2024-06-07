@@ -6,7 +6,7 @@ import HomePage from './pages/home/HomePage.jsx';
 import StudyFlashcard from './pages/studyFlashcard/StudyFlashcard.jsx';
 import ReferencePage from './pages/reference/ReferencePage.jsx'
 import ArrayPage from './pages/reference/array/ArrayPage.jsx';
-import ArrayMethodPage from './pages/reference/method/ArrayMethodPage.jsx';
+import ArrayMethodPage from './pages/reference/array-method/ArrayMethodPage.jsx';
 import NotFound from "./pages/error/NotFound.jsx";
 import AuthPage from './lib/components/Auth.jsx';
 
