@@ -67,9 +67,11 @@ function App() {
             <Routes>
                 <Route path="/" element={<Layout />}>
                     <Route path="/" element={user ? <HomePage /> : <Navigate to="/auth" />} />
-                    <Route path="/study" element={user ? <StudyFlashcard /> : <Navigate to="/auth" />} />
-                    <Route path="/arrays" element={user ? <ArrayPage /> : <Navigate to="/auth" />} />
-                    <Route path="/arrays/:array_method" element={user ? <ArrayMethodPage /> : <Navigate to="/auth" />} />
+                    <Route path="/decks" element={user ? <Decks /> : <Navigate to="/auth" />} />
+                    <Route path="study" element={user ? <StudyFlashcard /> : <Navigate to="/auth" />} />
+                    <Route path="/reference" element={user ? <ReferencePage /> : <Navigate to="/auth" />} />
+                    <Route path="/reference/:method_type" element={user ? <MethodTypePage /> : <Navigate to="/auth" />} />
+                    <Route path="/reference/:method_type/:method_name" element={user ? <MethodPage /> : <Navigate to="/auth" />} />
                     <Route path="*" element={<NotFound />} />
                 </Route>
                 <Route path="/auth" element={<AuthPage />} />
