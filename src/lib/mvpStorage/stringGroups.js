@@ -18,9 +18,9 @@ export const stringGroups = [
             { id: 9, name: "includes", method: "includes()", description: "determines whether one string may be found within another string", core: true },
             { id: 10, name: "indexOf", method: "indexOf()", description: "returns the index of the first occurrence of a specified value", core: true },
             { id: 11, name: "lastIndexOf", method: "lastIndexOf()", description: "returns the index of the last occurrence of a specified value", core: false },
-            { id: 12, name: "match", method: "match()", description: "retrieves the result of matching a string against a regular expression", core: true },
+            { id: 12, name: "match", method: "match()", description: "returns array with result of matching a string against a regular expression", core: true },
             { id: 13, name: "matchAll", method: "matchAll()", description: "returns an iterator of all results matching a string against a regular expression", core: false },
-            { id: 14, name: "search", method: "search()", description: "executes a search for a match between a regular expression and this String object", core: true },
+            { id: 14, name: "search", method: "search()", description: "searches a string for a specified value, and returns the position of the match.", core: true },
             { id: 15, name: "startsWith", method: "startsWith()", description: "determines whether a string begins with the characters of a specified string", core: true },
             { id: 16, name: "endsWith", method: "endsWith()", description: "determines whether a string ends with the characters of a specified string", core: true },
         ]
